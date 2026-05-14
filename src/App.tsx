@@ -4,7 +4,7 @@
  */
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
@@ -14,9 +14,12 @@ import { Footer } from './components/Footer';
 import { Admin } from './components/Admin';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { DataProvider, useData } from './contexts/DataContext';
+import { FloatingActions } from './components/FloatingActions';
+import { BookingModal } from './components/BookingModal';
 
 function MainLayout() {
   const { data, loading } = useData();
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
 
   if (loading) return null;
 
@@ -27,7 +30,7 @@ function MainLayout() {
       transition={{ duration: 1 }}
       className="min-h-screen bg-primary selection:bg-accent selection:text-primary"
     >
-      <Navbar />
+      <Navbar onBookClick={() => setIsBookingOpen(true)} />
       
       <main>
         <Hero />
@@ -57,7 +60,7 @@ function MainLayout() {
           </div>
         </section>
 
-        <Destinations />
+        <Destinations onBookClick={() => setIsBookingOpen(true)} />
         
         {/* Experience Banner */}
         <section className="relative h-[60vh] w-full flex items-center justify-center overflow-hidden">
@@ -70,7 +73,10 @@ function MainLayout() {
           <div className="absolute inset-0 bg-primary/40 backdrop-blur-[2px]" />
           <div className="relative z-10 text-center px-6">
             <h2 className="text-4xl md:text-6xl font-bold mb-8 uppercase tracking-widest text-white">Elevate Your Reality</h2>
-            <button className="bg-white text-primary px-12 py-5 rounded-full text-xs font-bold uppercase tracking-[0.2em] hover:bg-accent transition-colors duration-300">
+            <button 
+              onClick={() => setIsBookingOpen(true)}
+              className="bg-white text-primary px-12 py-5 rounded-full text-xs font-bold uppercase tracking-[0.2em] hover:bg-accent transition-colors duration-300"
+            >
               Start Planning
             </button>
           </div>
@@ -81,6 +87,9 @@ function MainLayout() {
       </main>
 
       <Footer />
+      
+      <FloatingActions />
+      <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
     </motion.div>
   );
 }

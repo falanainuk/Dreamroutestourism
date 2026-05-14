@@ -1,10 +1,10 @@
 {
   "settings": {
-    "siteName": "Dream Route Tourism",
-    "description": "Premium cinematic travel and tourism interface.",
-    "currency": "USD",
-    "heroImage": "https://images.unsplash.com/photo-1506953823976-52e1bdc0149a?q=80&w=2070&auto=format&fit=crop",
-    "logo": "",
+    "siteName": "Dream Routes Tourism",
+    "description": "Your ultimate partner for travel and tourism in the UAE. Limited-time deals on Dubai City Tours and Luxury Yacht Charters. Save up to 20%.",
+    "currency": "AED",
+    "heroImage": "https://images.unsplash.com/photo-1512453979798-5ea266f8880c",
+    "logo": "/logo.png",
     "socials": {
       "instagram": "https://instagram.com",
       "twitter": "https://twitter.com",
@@ -14,51 +14,69 @@
   "services": [
     {
       "id": "1",
-      "title": "Global Visa Services",
-      "description": "Hassle-free visa processing for over 150 countries with a 98% success rate.",
-      "price": 150
+      "title": "Yacht Tours – Shared & Private",
+      "description": "Sail the Dubai Marina or The Palm on a luxury yacht — available as shared or private charters.",
+      "price": 299
     },
     {
       "id": "2",
-      "title": "Premium Flight Booking",
-      "description": "Exclusive access to private charters and premium cabin deals globally.",
-      "price": 500
+      "title": "Desert Safari Experiences",
+      "description": "Ride into the golden dunes with thrilling safaris, cultural shows, BBQ dinners, and private setups.",
+      "price": 150
     },
     {
       "id": "3",
-      "title": "Luxury Accommodation",
-      "description": "Hand-picked resorts and boutique hotels evaluated for extreme comfort.",
-      "price": 300
+      "title": "Dubai & Abu Dhabi City Tours",
+      "description": "Discover the icons and hidden gems with guided full-day or half-day city tours.",
+      "price": 199
+    },
+    {
+      "id": "4",
+      "title": "Dubai Views & Sky Experiences",
+      "description": "Capture Dubai from above — at the Burj Khalifa, Frame, Sky Views, or a hot air balloon.",
+      "price": 250
+    },
+    {
+      "id": "5",
+      "title": "Adventure & Extreme Activities",
+      "description": "Skydiving, ziplining, jetskiing & more - for the adrenaline junkie in you.",
+      "price": 500
+    },
+    {
+      "id": "6",
+      "title": "MICE Services",
+      "description": "Incentive Travel, Travel & Logistics Management, and End-to-End Event Planning.",
+      "price": 1000
     }
   ],
   "destinations": [
     {
       "id": "1",
-      "name": "Maldives",
-      "country": "Tropical Paradise",
-      "price": 2499,
-      "image": "https://images.unsplash.com/photo-1514282401047-d79a71a590e8"
-    },
-    {
-      "id": "2",
-      "name": "Paris",
-      "country": "France",
-      "price": 1850,
-      "image": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34"
-    },
-    {
-      "id": "3",
-      "name": "Dubai",
+      "name": "Dubai Marina",
       "country": "UAE",
-      "price": 1200,
+      "price": 299,
       "image": "https://images.unsplash.com/photo-1512453979798-5ea266f8880c"
     },
     {
+      "id": "2",
+      "name": "Burj Khalifa",
+      "country": "UAE",
+      "price": 250,
+      "image": "https://images.unsplash.com/photo-1526495124232-a04e1849168c"
+    },
+    {
+      "id": "3",
+      "name": "Desert Safari",
+      "country": "UAE",
+      "price": 150,
+      "image": "https://images.unsplash.com/photo-1542401886-65d6c61db217"
+    },
+    {
       "id": "4",
-      "name": "Serengeti",
-      "country": "Tanzania",
-      "price": 3100,
-      "image": "https://images.unsplash.com/photo-1516426122078-c23e76319801"
+      "name": "Abu Dhabi",
+      "country": "UAE",
+      "price": 199,
+      "image": "https://images.unsplash.com/photo-1512632578888-169bbbc64f33"
     }
   ]
 }

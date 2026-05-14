@@ -2,7 +2,7 @@ import { motion } from 'motion/react';
 import { ArrowUpRight, MapPin } from 'lucide-react';
 import { useData } from '../contexts/DataContext';
 
-export function Destinations() {
+export function Destinations({ onBookClick }: { onBookClick?: () => void }) {
   const { data } = useData();
   const destinations = data?.destinations || [];
 
@@ -34,9 +34,9 @@ export function Destinations() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
           >
-             <button className="flex items-center gap-2 group text-sm font-bold uppercase tracking-widest hover:text-accent transition-colors">
+            <a href="#services" className="flex items-center gap-2 group text-sm font-bold uppercase tracking-widest hover:text-accent transition-colors">
               Explore All <ArrowUpRight className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-            </button>
+            </a>
           </motion.div>
         </div>
 
@@ -48,6 +48,7 @@ export function Destinations() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
+              onClick={onBookClick}
               className="group relative h-[450px] overflow-hidden rounded-3xl cursor-pointer"
             >
               <img 

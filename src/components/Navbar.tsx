@@ -6,7 +6,11 @@ import { useTheme } from '../contexts/ThemeContext';
 import { useData } from '../contexts/DataContext';
 import { Link } from 'react-router-dom';
 
-export function Navbar() {
+interface NavbarProps {
+  onBookClick?: () => void;
+}
+
+export function Navbar({ onBookClick }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
@@ -66,7 +70,10 @@ export function Navbar() {
             {theme === 'dark' ? <Sun size={20} className="text-accent" /> : <Moon size={20} className="text-accent" />}
           </button>
 
-          <button className="bg-accent text-primary px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-all duration-300">
+          <button 
+            onClick={onBookClick}
+            className="bg-accent text-primary px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-all duration-300"
+          >
             Book Now
           </button>
         </div>
@@ -105,10 +112,19 @@ export function Navbar() {
                   {link.name}
                 </a>
               ))}
+              <button 
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  onBookClick?.();
+                }}
+                className="w-full mt-4 bg-accent text-primary py-3 rounded-lg font-bold uppercase tracking-widest text-sm"
+              >
+                Book Now
+              </button>
               <Link
                 to="/admin"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-xs text-gray-500 uppercase tracking-widest mt-4"
+                className="text-xs text-gray-500 uppercase tracking-widest mt-4 text-center"
               >
                 Admin console
               </Link>

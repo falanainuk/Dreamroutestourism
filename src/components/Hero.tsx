@@ -2,7 +2,7 @@ import { motion } from 'motion/react';
 import { ArrowRight, Plane, Shield, Globe } from 'lucide-react';
 import { useData } from '../contexts/DataContext';
 
-export function Hero() {
+export function Hero({ onBookClick }: { onBookClick?: () => void }) {
   const { data } = useData();
   const heroImage = data?.settings.heroImage || "https://images.unsplash.com/photo-1506953823976-52e1bdc0149a?q=80&w=2070&auto=format&fit=crop";
 
@@ -57,13 +57,19 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 1 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <button className="group relative bg-accent text-primary px-10 py-5 rounded-full text-sm font-bold uppercase tracking-widest overflow-hidden transition-all duration-300 hover:pr-14">
+          <button 
+            onClick={onBookClick}
+            className="group relative bg-accent text-primary px-10 py-5 rounded-full text-sm font-bold uppercase tracking-widest overflow-hidden transition-all duration-300 hover:pr-14"
+          >
             <span className="relative z-10">Start Your Journey</span>
             <ArrowRight className="absolute right-5 top-1/2 -translate-y-1/2 opacity-0 -translate-x-4 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300" />
           </button>
-          <button className="px-10 py-5 rounded-full text-sm font-bold uppercase tracking-widest border border-white/20 hover:bg-white/10 transition-all duration-300">
+          <a 
+            href="#destinations"
+            className="px-10 py-5 rounded-full text-sm font-bold uppercase tracking-widest border border-white/20 hover:bg-white/10 transition-all duration-300 inline-block"
+          >
             View Destinations
-          </button>
+          </a>
         </motion.div>
       </div>
 
