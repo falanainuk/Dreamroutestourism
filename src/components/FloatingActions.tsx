@@ -1,8 +1,14 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { MessageCircle, Instagram, Twitter, Facebook, Plus, X } from 'lucide-react';
+import { MessageCircle, Instagram, Facebook, Plus, X, Linkedin } from 'lucide-react';
 import { useData } from '../contexts/DataContext';
 import { cn } from '../lib/utils';
+
+const TikTokIcon = ({ size = 20 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
+  </svg>
+);
 
 export function FloatingActions() {
   const { data } = useData();
@@ -15,8 +21,9 @@ export function FloatingActions() {
 
   const socialLinks = [
     { Icon: Instagram, href: socials?.instagram, color: "hover:bg-pink-600 hover:text-white" },
-    { Icon: Twitter, href: socials?.twitter, color: "hover:bg-blue-400 hover:text-white" },
+    { Icon: TikTokIcon, href: socials?.tiktok, color: "hover:bg-black hover:text-white" },
     { Icon: Facebook, href: socials?.facebook, color: "hover:bg-blue-600 hover:text-white" },
+    { Icon: Linkedin, href: socials?.linkedin, color: "hover:bg-blue-700 hover:text-white" },
   ].filter(link => link.href);
 
   return (
@@ -39,7 +46,7 @@ export function FloatingActions() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.1 }}
                 className={cn(
-                  "w-12 h-12 bg-surface/90 backdrop-blur-md border border-white/10 rounded-full flex items-center justify-center text-white transition-all duration-300 shadow-lg",
+                  "w-12 h-12 bg-gray-900 dark:bg-surface/90 backdrop-blur-md border border-white/10 rounded-full flex items-center justify-center text-white transition-all duration-300 shadow-lg",
                   social.color
                 )}
               >
@@ -66,7 +73,7 @@ export function FloatingActions() {
         {socialLinks.length > 0 && (
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="w-12 h-12 bg-surface/90 backdrop-blur-md border border-white/10 rounded-full flex items-center justify-center text-white shadow-lg hover:bg-white/10 transition-all duration-300"
+            className="w-12 h-12 bg-gray-900 dark:bg-surface/90 backdrop-blur-md border border-white/10 rounded-full flex items-center justify-center text-white shadow-lg hover:bg-white/10 transition-all duration-300"
           >
             {isOpen ? <X size={20} /> : <Plus size={20} />}
           </button>

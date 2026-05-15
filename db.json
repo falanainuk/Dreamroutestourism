@@ -6,9 +6,10 @@
     "heroImage": "https://images.unsplash.com/photo-1512453979798-5ea266f8880c",
     "logo": "/logo.png",
     "socials": {
-      "instagram": "https://instagram.com",
-      "twitter": "https://twitter.com",
-      "facebook": "https://facebook.com"
+      "instagram": "https://www.instagram.com/dreamroutestourism/",
+      "facebook": "https://www.facebook.com/profile.php?id=61556768529484",
+      "tiktok": "https://www.tiktok.com/@dreamroutestourism",
+      "linkedin": "https://linkedin.com"
     }
   },
   "services": [
@@ -47,6 +48,12 @@
       "title": "MICE Services",
       "description": "Incentive Travel, Travel & Logistics Management, and End-to-End Event Planning.",
       "price": 1000
+    },
+    {
+      "id": "1778762289333",
+      "title": "test",
+      "description": "testDescribe the service...",
+      "price": 100
     }
   ],
   "destinations": [
@@ -77,6 +84,20 @@
       "country": "UAE",
       "price": 199,
       "image": "https://images.unsplash.com/photo-1512632578888-169bbbc64f33"
+    },
+    {
+      "id": "1778762276093",
+      "name": "eid holidays",
+      "country": "dubai",
+      "price": 0,
+      "image": "/uploads/1778762328714-ChatGPT-Image-May-14,-2026,-01_26_49-PM.png"
+    },
+    {
+      "id": "1778762279038",
+      "name": "Destination Name",
+      "country": "Country",
+      "price": 0,
+      "image": "https://images.unsplash.com/photo-1514282401047-d79a71a590e8"
     }
   ]
 }

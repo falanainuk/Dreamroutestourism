@@ -8,7 +8,7 @@ const iconMap: Record<string, any> = {
   "2": <Hotel className="w-8 h-8" />,
 };
 
-export function Services() {
+export function Services({ onBookClick }: { onBookClick?: () => void }) {
   const { data } = useData();
   const services = data?.services || [];
 
@@ -54,7 +54,10 @@ export function Services() {
                 <span className="text-accent font-bold tracking-widest text-sm">
                   {data?.settings.currency} {service.price}
                 </span>
-                <button className="text-[10px] font-bold uppercase tracking-widest text-accent border-b border-accent/30 pb-1 hover:border-accent transition-all duration-300">
+                <button 
+                  onClick={onBookClick}
+                  className="text-[10px] font-bold uppercase tracking-widest text-accent border-b border-accent/30 pb-1 hover:border-accent transition-all duration-300"
+                >
                   Learn More
                 </button>
               </div>

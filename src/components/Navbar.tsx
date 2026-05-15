@@ -40,7 +40,9 @@ export function Navbar({ onBookClick }: NavbarProps) {
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 group cursor-pointer">
           {data?.settings.logo ? (
-            <img src={data.settings.logo} alt="Logo" className="w-10 h-10 object-contain group-hover:scale-110 transition-transform duration-300" />
+            <div className="bg-white/90 p-1 rounded-lg backdrop-blur-sm shadow-sm group-hover:scale-110 transition-transform duration-300">
+              <img src={data.settings.logo} alt="Logo" className="w-8 h-8 object-contain" />
+            </div>
           ) : (
             <div className="w-10 h-10 bg-accent rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
               <Plane className="text-primary w-6 h-6 -rotate-45" />

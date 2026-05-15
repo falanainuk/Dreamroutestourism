@@ -33,7 +33,7 @@ function MainLayout() {
       <Navbar onBookClick={() => setIsBookingOpen(true)} />
       
       <main>
-        <Hero />
+        <Hero onBookClick={() => setIsBookingOpen(true)} />
         
         {/* About Section / Sub-Hero */}
         <section id="about" className="py-24 md:py-40 bg-surface text-center overflow-hidden">
@@ -82,7 +82,7 @@ function MainLayout() {
           </div>
         </section>
 
-        <Services />
+        <Services onBookClick={() => setIsBookingOpen(true)} />
         
       </main>
 
