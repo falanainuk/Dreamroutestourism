@@ -12,14 +12,28 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
   const { data } = useData();
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
-    // Automatically close the modal after 3 seconds of showing success message
-    setTimeout(() => {
-      setIsSubmitted(false);
-      onClose();
-    }, 3000);
+    const formData = new FormData(e.target as HTMLFormElement);
+    const data = Object.fromEntries(formData.entries());
+
+    try {
+      const res = await fetch('/api/enquiries', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      if (res.ok) {
+        setIsSubmitted(true);
+        setTimeout(() => {
+          setIsSubmitted(false);
+          onClose();
+        }, 3000);
+      }
+    } catch (err) {
+      console.error("Booking error:", err);
+    }
   };
 
   return (
@@ -75,19 +89,19 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <label className="text-sm text-gray-400 flex items-center gap-2"><User size={14} /> Full Name</label>
-                      <input required type="text" className="w-full bg-primary/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors" placeholder="John Doe" />
+                      <input name="name" required type="text" className="w-full bg-primary/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors" placeholder="John Doe" />
                     </div>
                     <div className="space-y-2">
                       <label className="text-sm text-gray-400 flex items-center gap-2"><Mail size={14} /> Email Address</label>
-                      <input required type="email" className="w-full bg-primary/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors" placeholder="john@example.com" />
+                      <input name="email" required type="email" className="w-full bg-primary/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors" placeholder="john@example.com" />
                     </div>
                     <div className="space-y-2">
                       <label className="text-sm text-gray-400 flex items-center gap-2"><Phone size={14} /> Phone Number</label>
-                      <input required type="tel" className="w-full bg-primary/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors" placeholder="+1 234 567 890" />
+                      <input name="phone" required type="tel" className="w-full bg-primary/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors" placeholder="+1 234 567 890" />
                     </div>
                     <div className="space-y-2">
                       <label className="text-sm text-gray-400 flex items-center gap-2"><MapPin size={14} /> Destination</label>
-                      <select className="w-full bg-primary/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors appearance-none">
+                      <select name="destination" className="w-full bg-primary/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors appearance-none">
                         <option value="">Select Destination</option>
                         {data?.destinations.map(d => (
                           <option key={d.id} value={d.name}>{d.name}, {d.country}</option>
@@ -99,12 +113,12 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
 
                   <div className="space-y-2">
                     <label className="text-sm text-gray-400 flex items-center gap-2"><Calendar size={14} /> Preferred Dates</label>
-                    <input type="text" className="w-full bg-primary/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors" placeholder="e.g. Mid-August or Exact Dates" />
+                    <input name="dates" type="text" className="w-full bg-primary/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors" placeholder="e.g. Mid-August or Exact Dates" />
                   </div>
 
                   <div className="space-y-2">
                     <label className="text-sm text-gray-400 flex items-center gap-2"><MessageSquare size={14} /> Special Requests / Details</label>
-                    <textarea rows={4} className="w-full bg-primary/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors resize-none" placeholder="Tell us about your dream trip..."></textarea>
+                    <textarea name="message" rows={4} className="w-full bg-primary/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors resize-none" placeholder="Tell us about your dream trip..."></textarea>
                   </div>
 
                   <button type="submit" className="w-full bg-accent text-primary py-4 rounded-lg font-bold uppercase tracking-widest hover:bg-white transition-colors duration-300">

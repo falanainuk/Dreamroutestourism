@@ -16,12 +16,23 @@ import { ThemeProvider } from './contexts/ThemeContext';
 import { DataProvider, useData } from './contexts/DataContext';
 import { FloatingActions } from './components/FloatingActions';
 import { BookingModal } from './components/BookingModal';
+import { Contact } from './components/Contact';
+import { Packages } from './components/Packages';
+import { ItemDetailModal } from './components/ItemDetailModal';
+import { AllPackages } from './pages/AllPackages';
 
 function MainLayout() {
   const { data, loading } = useData();
   const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<any>(null);
+  const [isDetailOpen, setIsDetailOpen] = useState(false);
 
   if (loading) return null;
+
+  const handleItemClick = (item: any) => {
+    setSelectedItem(item);
+    setIsDetailOpen(true);
+  };
 
   return (
     <motion.div 
@@ -60,7 +71,17 @@ function MainLayout() {
           </div>
         </section>
 
-        <Destinations onBookClick={() => setIsBookingOpen(true)} />
+        <Destinations 
+          onItemClick={handleItemClick} 
+          onBookClick={() => setIsBookingOpen(true)} 
+        />
+        
+        <Services onBookClick={handleItemClick} />
+
+        <Packages 
+          onItemClick={handleItemClick} 
+          onBookClick={() => setIsBookingOpen(true)} 
+        />
         
         {/* Experience Banner */}
         <section className="relative h-[60vh] w-full flex items-center justify-center overflow-hidden">
@@ -82,7 +103,7 @@ function MainLayout() {
           </div>
         </section>
 
-        <Services onBookClick={() => setIsBookingOpen(true)} />
+        <Contact />
         
       </main>
 
@@ -90,6 +111,12 @@ function MainLayout() {
       
       <FloatingActions />
       <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
+      <ItemDetailModal 
+        isOpen={isDetailOpen} 
+        onClose={() => setIsDetailOpen(false)} 
+        item={selectedItem}
+        onBookClick={() => setIsBookingOpen(true)}
+      />
     </motion.div>
   );
 }
@@ -117,6 +144,7 @@ function AppContent() {
     <Router>
       <Routes>
         <Route path="/" element={<MainLayout />} />
+        <Route path="/packages" element={<AllPackages />} />
         <Route path="/admin" element={<Admin />} />
       </Routes>
     </Router>

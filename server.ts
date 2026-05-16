@@ -209,6 +209,41 @@ async function startServer() {
     res.json({ url });
   });
 
+  // --- ENQUIRY / CRM ROUTES ---
+
+  app.post("/api/enquiries", async (req, res) => {
+    const enquiry = {
+      id: Date.now().toString(),
+      timestamp: new Date().toISOString(),
+      ...req.body,
+      status: "new"
+    };
+
+    const data = JSON.parse(fs.readFileSync(dbPath, "utf-8"));
+    if (!data.enquiries) data.enquiries = [];
+    data.enquiries.unshift(enquiry);
+    fs.writeFileSync(dbPath, JSON.stringify(data, null, 2));
+
+    // Mock Email Logic
+    console.log(`[MOCK EMAIL] Confirmation sent to: ${enquiry.email}`);
+    console.log(`[MOCK EMAIL] Content: Thank you ${enquiry.name}, we have received your request for ${enquiry.destination || 'service'}.`);
+
+    res.json({ success: true });
+  });
+
+  app.get("/api/admin/enquiries", isAuthorized, (req, res) => {
+    const data = JSON.parse(fs.readFileSync(dbPath, "utf-8"));
+    res.json(data.enquiries || []);
+  });
+
+  app.post("/api/admin/enquiries/delete", isAuthorized, (req, res) => {
+    const { id } = req.body;
+    const data = JSON.parse(fs.readFileSync(dbPath, "utf-8"));
+    data.enquiries = (data.enquiries || []).filter((e: any) => e.id !== id);
+    fs.writeFileSync(dbPath, JSON.stringify(data, null, 2));
+    res.json({ success: true });
+  });
+
   // Global error handler for API to return JSON instead of HTML
   app.use("/api", (err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
     console.error("API Error:", err);

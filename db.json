@@ -17,43 +17,49 @@
       "id": "1",
       "title": "Yacht Tours – Shared & Private",
       "description": "Sail the Dubai Marina or The Palm on a luxury yacht — available as shared or private charters.",
+      "details": "Experience the ultimate luxury with our yacht tours. Whether you're looking for a romantic sunset cruise or a lively party with friends, our yachts offer the perfect setting. Available for shared or private charters, each tour includes professional crew and premium amenities.",
+      "image": "https://images.unsplash.com/photo-1567891740298-2a9711f05eb2",
       "price": 299
     },
     {
       "id": "2",
       "title": "Desert Safari Experiences",
       "description": "Ride into the golden dunes with thrilling safaris, cultural shows, BBQ dinners, and private setups.",
+      "details": "Discover the magic of the Arabian desert with our safari experiences. From adrenaline-pumping dune bashing to serene camel treks and traditional Bedouin camp performances, we provide an authentic desert adventure followed by a gourmet BBQ dinner under the stars.",
+      "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa",
       "price": 150
     },
     {
       "id": "3",
       "title": "Dubai & Abu Dhabi City Tours",
       "description": "Discover the icons and hidden gems with guided full-day or half-day city tours.",
+      "details": "Join our expert guides as we explore the architectural marvels and rich heritage of Dubai and Abu Dhabi. Visit the Burj Khalifa, Sheikh Zayed Grand Mosque, and the charming old souks. Available as full-day or half-day excursions tailored to your interests.",
+      "image": "https://images.unsplash.com/photo-1512453979798-5ea266f8880c",
       "price": 199
     },
     {
       "id": "4",
       "title": "Dubai Views & Sky Experiences",
       "description": "Capture Dubai from above — at the Burj Khalifa, Frame, Sky Views, or a hot air balloon.",
+      "details": "See the world from a different perspective. Our sky experiences take you to the highest observation decks and offer breathtaking aerial views of the city. Perfect for photography enthusiasts and those looking for a truly unforgettable experience.",
+      "image": "https://images.unsplash.com/photo-1526495124232-a04e1849168c",
       "price": 250
     },
     {
       "id": "5",
       "title": "Adventure & Extreme Activities",
       "description": "Skydiving, ziplining, jetskiing & more - for the adrenaline junkie in you.",
+      "details": "For those who crave excitement, our adventure packages offer the thrill of a lifetime. From skydiving over the Palm Jumeirah to ziplining through the city and high-speed jetskiing, we have something for every adrenaline seeker.",
+      "image": "https://images.unsplash.com/photo-1534447677768-be436bb09401",
       "price": 500
     },
     {
       "id": "6",
       "title": "MICE Services",
       "description": "Incentive Travel, Travel & Logistics Management, and End-to-End Event Planning.",
+      "details": "We specialize in corporate travel and event management. From organizing large-scale conferences to intimate incentive trips, our team handles all logistics, including transport, accommodation, and high-end event planning to ensure a seamless experience.",
+      "image": "https://images.unsplash.com/photo-1511578314322-379afb476865",
       "price": 1000
-    },
-    {
-      "id": "1778762289333",
-      "title": "test",
-      "description": "testDescribe the service...",
-      "price": 100
     }
   ],
   "destinations": [
@@ -61,6 +67,8 @@
       "id": "1",
       "name": "Dubai Marina",
       "country": "UAE",
+      "departureType": "flexible",
+      "details": "Explore the stunning Dubai Marina, the world's largest man-made marina. Enjoy a luxury yacht cruise, walk along the Marina Walk, and dine at world-class restaurants with breathtaking skyline views.",
       "price": 299,
       "image": "https://images.unsplash.com/photo-1512453979798-5ea266f8880c"
     },
@@ -68,6 +76,8 @@
       "id": "2",
       "name": "Burj Khalifa",
       "country": "UAE",
+      "departureType": "fixed",
+      "details": "Visit the iconic Burj Khalifa, the tallest building in the world. Experience the 'At the Top' observation deck for unparalleled views of Dubai and witness the spectacular Dubai Fountain show from above.",
       "price": 250,
       "image": "https://images.unsplash.com/photo-1526495124232-a04e1849168c"
     },
@@ -75,6 +85,8 @@
       "id": "3",
       "name": "Desert Safari",
       "country": "UAE",
+      "departureType": "flexible",
+      "details": "Experience the thrill of the Arabian desert with a sunset safari. Activities include dune bashing, camel riding, sandboarding, and a traditional BBQ dinner with live cultural performances under the stars.",
       "price": 150,
       "image": "https://images.unsplash.com/photo-1542401886-65d6c61db217"
     },
@@ -82,22 +94,67 @@
       "id": "4",
       "name": "Abu Dhabi",
       "country": "UAE",
+      "departureType": "fixed",
+      "details": "Discover the capital of the UAE. Visit the breathtaking Sheikh Zayed Grand Mosque, the Louvre Abu Dhabi, and the luxurious Emirates Palace. A perfect blend of culture, history, and modern luxury.",
       "price": 199,
       "image": "https://images.unsplash.com/photo-1512632578888-169bbbc64f33"
     },
     {
-      "id": "1778762276093",
-      "name": "eid holidays",
-      "country": "dubai",
-      "price": 0,
-      "image": "/uploads/1778762328714-ChatGPT-Image-May-14,-2026,-01_26_49-PM.png"
+      "id": "5",
+      "name": "Switzerland",
+      "country": "Europe",
+      "departureType": "fixed",
+      "details": "Journey through the picturesque Swiss Alps. Enjoy scenic train rides, visit charming lakeside towns like Lucerne, and experience the majestic beauty of Jungfraujoch, the 'Top of Europe'.",
+      "price": 2750,
+      "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4"
     },
     {
-      "id": "1778762279038",
-      "name": "Destination Name",
-      "country": "Country",
-      "price": 0,
+      "id": "6",
+      "name": "Maldives",
+      "country": "Island",
+      "departureType": "flexible",
+      "details": "Escape to the paradise of the Maldives. Relax in overwater villas, swim in crystal-clear turquoise waters, and enjoy world-class diving and snorkeling among vibrant coral reefs and marine life.",
+      "price": 1850,
       "image": "https://images.unsplash.com/photo-1514282401047-d79a71a590e8"
     }
-  ]
+  ],
+  "packages": [
+    {
+      "id": "1",
+      "title": "Luxury Yacht Escape",
+      "location": "Dubai Marina",
+      "departureType": "flexible",
+      "details": "The ultimate luxury experience. A 4-hour private yacht charter through Dubai Marina and around the Palm Jumeirah. Includes professional crew, refreshments, and an optional BBQ on board.",
+      "price": 2999,
+      "image": "https://images.unsplash.com/photo-1569263979104-865ab7cd8d13"
+    },
+    {
+      "id": "2",
+      "title": "Desert Safari & BBQ",
+      "location": "Dubai Desert",
+      "departureType": "flexible",
+      "details": "Our most popular package. Includes 4x4 dune bashing, camel rides, henna painting, shisha, and a lavish 5-star BBQ dinner with Tanoura and Belly Dance shows in a traditional desert camp.",
+      "price": 350,
+      "image": "https://images.unsplash.com/photo-1542401886-65d6c61db217"
+    },
+    {
+      "id": "3",
+      "title": "Abu Dhabi City Tour",
+      "location": "Abu Dhabi",
+      "departureType": "fixed",
+      "details": "A comprehensive full-day guided tour of Abu Dhabi. Highlights include the Grand Mosque, Heritage Village, Date Market, and a photo stop at Ferrari World and Yas Island.",
+      "price": 450,
+      "image": "https://images.unsplash.com/photo-1512632578888-169bbbc64f33"
+    },
+    {
+      "id": "4",
+      "title": "Burj Khalifa at the Top",
+      "location": "Downtown Dubai",
+      "departureType": "fixed",
+      "details": "Get the best views of Dubai. This package includes fast-track entry to the 124th and 125th floors of the Burj Khalifa, followed by a delicious 3-course dinner at the Dubai Mall overlooking the fountains.",
+      "price": 399,
+      "image": "https://images.unsplash.com/photo-1526495124232-a04e1849168c"
+    }
+  ],
+  "enquiries": []
 }

@@ -41,10 +41,16 @@ export function Footer() {
           <div>
             <h4 className="text-sm font-bold uppercase tracking-widest mb-8 text-accent">Quick Links</h4>
             <ul className="space-y-4">
-              {['Destinations', 'Services', 'Packages', 'Testimonials', 'About Us'].map((item) => (
-                <li key={item}>
-                  <a href="#" className="text-gray-400 hover:text-white transition-colors uppercase text-xs tracking-widest font-medium">
-                    {item}
+              {[
+                { name: 'Destinations', href: '/#destinations' },
+                { name: 'Packages', href: '/#packages' },
+                { name: 'Services', href: '/#services' },
+                { name: 'About Us', href: '/#about' },
+                { name: 'Contact', href: '/#contact' }
+              ].map((item) => (
+                <li key={item.name}>
+                  <a href={item.href} className="text-gray-400 hover:text-white transition-colors uppercase text-xs tracking-widest font-medium">
+                    {item.name}
                   </a>
                 </li>
               ))}
