@@ -125,13 +125,6 @@ export function Navbar({ onBookClick }: NavbarProps) {
               >
                 Book Now
               </button>
-              <Link
-                to="/admin"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="text-xs text-gray-500 uppercase tracking-widest mt-4 text-center"
-              >
-                Admin console
-              </Link>
             </div>
           </motion.div>
         )}
