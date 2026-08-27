@@ -42,7 +42,7 @@ export function Navbar({ onBookClick }: NavbarProps) {
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 group cursor-pointer">
           {data?.settings.logo ? (
-            <div className="bg-white/90 p-1 rounded-lg backdrop-blur-sm shadow-sm group-hover:scale-110 transition-transform duration-300">
+            <div className="group-hover:scale-110 transition-transform duration-300">
               <img src={data.settings.logo} alt="Logo" className="w-8 h-8 object-contain" />
             </div>
           ) : (
