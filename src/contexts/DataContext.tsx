@@ -10,6 +10,20 @@ interface Settings {
     instagram: string;
     twitter: string;
     facebook: string;
+    tiktok?: string;
+    linkedin?: string;
+  };
+  popup?: {
+    enabled: boolean;
+    title: string;
+    description: string;
+    image: string;
+  };
+  seo?: {
+    title: string;
+    description: string;
+    keywords: string;
+    ogImage?: string;
   };
 }
 
@@ -18,6 +32,8 @@ interface Service {
   title: string;
   description: string;
   price: number;
+  details?: string;
+  image?: string;
 }
 
 interface Destination {
@@ -26,12 +42,38 @@ interface Destination {
   country: string;
   price: number;
   image: string;
+  details?: string;
+  departureType?: 'fixed' | 'flexible';
+}
+
+interface Package {
+  id: string;
+  title: string;
+  location: string;
+  departureType?: 'fixed' | 'flexible';
+  details?: string;
+  price: number;
+  image: string;
+}
+
+interface Enquiry {
+  id: string;
+  timestamp: string;
+  name: string;
+  email: string;
+  phone: string;
+  destination?: string;
+  dates?: string;
+  message?: string;
+  status?: string;
 }
 
 interface AppData {
   settings: Settings;
   services: Service[];
   destinations: Destination[];
+  packages: Package[];
+  enquiries: Enquiry[];
 }
 
 interface DataContextType {

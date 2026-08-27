@@ -70,7 +70,7 @@ export function Admin() {
     }
   };
 
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, target: 'hero' | 'logo' | { type: 'destination' | 'service' | 'package', id: string }) => {
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, target: 'hero' | 'logo' | 'popup' | { type: 'destination' | 'service' | 'package', id: string }) => {
     const file = e.target.files?.[0];
     if (!file || !localData) return;
 
@@ -108,6 +108,17 @@ export function Admin() {
           setLocalData({
             ...localData,
             settings: { ...localData.settings, logo: result.url }
+          });
+        } else if (target === 'popup') {
+          setLocalData({
+            ...localData,
+            settings: {
+              ...localData.settings,
+              popup: {
+                ...(localData.settings.popup || { enabled: true, title: '', description: '' }),
+                image: result.url
+              }
+            }
           });
         } else if (typeof target === 'object') {
           if (target.type === 'destination') {
@@ -298,6 +309,97 @@ export function Admin() {
                       />
                     </div>
                   ))}
+                </div>
+              </section>
+
+              {/* One-Time Offer Popup Settings */}
+              <section className="p-8 rounded-3xl glass border border-white/10">
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-lg font-bold flex items-center gap-2"><MapPin size={18} className="text-accent" /> Offer Popup</h3>
+                  <button
+                    onClick={() => setLocalData({
+                      ...localData,
+                      settings: {
+                        ...localData.settings,
+                        popup: {
+                          ...(localData.settings.popup || { title: '', description: '', image: '' }),
+                          enabled: !(localData.settings.popup?.enabled ?? true)
+                        }
+                      }
+                    })}
+                    className={`relative w-12 h-6 rounded-full transition-colors duration-300 ${localData.settings.popup?.enabled !== false ? 'bg-accent' : 'bg-white/10'}`}
+                  >
+                    <span className={`absolute top-1 w-4 h-4 bg-white rounded-full shadow transition-all duration-300 ${localData.settings.popup?.enabled !== false ? 'left-7' : 'left-1'}`} />
+                  </button>
+                </div>
+                <div className="space-y-4">
+                  <div>
+                    <label className="text-[10px] uppercase tracking-widest font-bold opacity-50 block mb-2">Popup Title</label>
+                    <input
+                      className="w-full bg-surface border border-white/10 rounded-xl px-4 py-3 focus:border-accent outline-none text-text"
+                      value={localData.settings.popup?.title || ''}
+                      placeholder="e.g. Exclusive Dubai Offer"
+                      onChange={e => setLocalData({ ...localData, settings: { ...localData.settings, popup: { ...(localData.settings.popup || { enabled: true, description: '', image: '' }), title: e.target.value } } })}
+                    />
+                  </div>
+                  <div>
+                    <label className="text-[10px] uppercase tracking-widest font-bold opacity-50 block mb-2">Popup Description</label>
+                    <textarea
+                      className="w-full bg-surface border border-white/10 rounded-xl px-4 py-3 focus:border-accent outline-none text-text resize-none h-24 text-sm font-light leading-relaxed"
+                      value={localData.settings.popup?.description || ''}
+                      placeholder="Describe the special offer..."
+                      onChange={e => setLocalData({ ...localData, settings: { ...localData.settings, popup: { ...(localData.settings.popup || { enabled: true, title: '', image: '' }), description: e.target.value } } })}
+                    ></textarea>
+                  </div>
+                  <div>
+                    <label className="text-[10px] uppercase tracking-widest font-bold opacity-50 block mb-2">Popup Banner Image</label>
+                    <div className="relative group rounded-xl overflow-hidden aspect-video bg-black/20 border border-white/5">
+                      {localData.settings.popup?.image && (
+                        <img src={localData.settings.popup.image} className="w-full h-full object-cover opacity-60" referrerPolicy="no-referrer" />
+                      )}
+                      <label className="absolute inset-0 flex flex-col items-center justify-center cursor-pointer hover:bg-black/40 transition-colors">
+                        <ImageIcon size={20} className="mb-1 text-accent" />
+                        <span className="text-[10px] font-bold uppercase tracking-widest text-white">Change Image</span>
+                        <input type="file" className="hidden" accept="image/*" onChange={(e) => handleImageUpload(e, 'popup')} />
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* SEO Settings */}
+              <section className="p-8 rounded-3xl glass border border-white/10">
+                <h3 className="text-lg font-bold mb-6 flex items-center gap-2"><Globe size={18} className="text-accent" /> SEO Settings</h3>
+                <div className="space-y-4">
+                  <div>
+                    <label className="text-[10px] uppercase tracking-widest font-bold opacity-50 block mb-2">Page Title (SEO)</label>
+                    <input
+                      className="w-full bg-surface border border-white/10 rounded-xl px-4 py-3 focus:border-accent outline-none text-text text-sm"
+                      value={localData.settings.seo?.title || ''}
+                      placeholder="e.g. Dream Routes Tourism - Dubai Tours"
+                      onChange={e => setLocalData({ ...localData, settings: { ...localData.settings, seo: { ...(localData.settings.seo || { description: '', keywords: '' }), title: e.target.value } } })}
+                    />
+                  </div>
+                  <div>
+                    <label className="text-[10px] uppercase tracking-widest font-bold opacity-50 block mb-2">Meta Description</label>
+                    <textarea
+                      className="w-full bg-surface border border-white/10 rounded-xl px-4 py-3 focus:border-accent outline-none text-text resize-none h-24 text-sm font-light leading-relaxed"
+                      value={localData.settings.seo?.description || ''}
+                      placeholder="Short page summary for search engines (max 160 chars)"
+                      maxLength={160}
+                      onChange={e => setLocalData({ ...localData, settings: { ...localData.settings, seo: { ...(localData.settings.seo || { title: '', keywords: '' }), description: e.target.value } } })}
+                    ></textarea>
+                    <p className="text-[10px] opacity-30 mt-1 text-right">{(localData.settings.seo?.description || '').length}/160</p>
+                  </div>
+                  <div>
+                    <label className="text-[10px] uppercase tracking-widest font-bold opacity-50 block mb-2">Keywords (comma separated)</label>
+                    <input
+                      className="w-full bg-surface border border-white/10 rounded-xl px-4 py-3 focus:border-accent outline-none text-text text-sm"
+                      value={localData.settings.seo?.keywords || ''}
+                      placeholder="Dubai tours, Yacht Charter, Desert Safari"
+                      onChange={e => setLocalData({ ...localData, settings: { ...localData.settings, seo: { ...(localData.settings.seo || { title: '', description: '' }), keywords: e.target.value } } })}
+                    />
+                  </div>
                 </div>
               </section>
 

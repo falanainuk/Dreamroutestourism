@@ -10,6 +10,17 @@
       "facebook": "https://www.facebook.com/profile.php?id=61556768529484",
       "tiktok": "https://www.tiktok.com/@dreamroutestourism",
       "linkedin": "https://linkedin.com"
+    },
+    "popup": {
+      "enabled": true,
+      "title": "Exclusive Dubai Offer",
+      "description": "Book any Yacht Charter today and get a complimentary Desert Safari experience! Limited slots available.",
+      "image": "https://images.unsplash.com/photo-1542401886-65d6c61db217"
+    },
+    "seo": {
+      "title": "Dream Routes Tourism - Best Tour Packages, Dubai City Tours",
+      "description": "Your ultimate partner for travel and tourism in the UAE. Discover Dubai Marina cruises, Desert Safaris, and luxury yacht charters.",
+      "keywords": "Dubai tours, Yacht Charter Dubai, Desert Safari, UAE travel agency, Dream Routes"
     }
   },
   "services": [

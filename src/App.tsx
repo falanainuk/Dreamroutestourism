@@ -20,6 +20,7 @@ import { Contact } from './components/Contact';
 import { Packages } from './components/Packages';
 import { ItemDetailModal } from './components/ItemDetailModal';
 import { AllPackages } from './pages/AllPackages';
+import { OfferPopup } from './components/OfferPopup';
 
 function MainLayout() {
   const { data, loading } = useData();
@@ -117,6 +118,7 @@ function MainLayout() {
         item={selectedItem}
         onBookClick={() => setIsBookingOpen(true)}
       />
+      <OfferPopup onContactClick={() => setIsBookingOpen(true)} />
     </motion.div>
   );
 }
@@ -134,10 +136,30 @@ function AppContent() {
       }
       link.href = data.settings.logo;
     }
-    
-    if (data?.settings.siteName) {
-      document.title = data.settings.siteName;
-    }
+
+    // Dynamic SEO from admin settings
+    const seo = data?.settings.seo;
+    const siteName = data?.settings.siteName || 'Dream Routes Tourism';
+    document.title = seo?.title || siteName;
+
+    const setMeta = (name: string, content: string) => {
+      let el = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement | null;
+      if (!el) { el = document.createElement('meta'); el.setAttribute('name', name); document.head.appendChild(el); }
+      el.setAttribute('content', content);
+    };
+    const setOgMeta = (property: string, content: string) => {
+      let el = document.querySelector(`meta[property="${property}"]`) as HTMLMetaElement | null;
+      if (!el) { el = document.createElement('meta'); el.setAttribute('property', property); document.head.appendChild(el); }
+      el.setAttribute('content', content);
+    };
+
+    if (seo?.description) setMeta('description', seo.description);
+    if (seo?.keywords) setMeta('keywords', seo.keywords);
+    setOgMeta('og:title', seo?.title || siteName);
+    setOgMeta('og:description', seo?.description || data?.settings.description || '');
+    setOgMeta('og:type', 'website');
+    setMeta('robots', 'index, follow');
+    setMeta('author', siteName);
   }, [data]);
 
   return (
