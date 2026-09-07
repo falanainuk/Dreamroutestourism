@@ -68,12 +68,24 @@ interface Enquiry {
   status?: string;
 }
 
+export interface Review {
+  id: string;
+  name: string;
+  avatar: string;
+  rating: number;
+  date: string;
+  badge: string;
+  service: string;
+  comment: string;
+}
+
 interface AppData {
   settings: Settings;
   services: Service[];
   destinations: Destination[];
   packages: Package[];
   enquiries: Enquiry[];
+  reviews?: Review[];
 }
 
 interface DataContextType {

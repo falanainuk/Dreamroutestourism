@@ -170,6 +170,46 @@ async function startServer() {
     res.json({ success: true });
   });
 
+  app.post("/api/admin/sync-reviews", isAuthorized, async (req, res) => {
+    const apiKey = process.env.SERPAPI_KEY;
+    const placeId = process.env.GOOGLE_PLACE_ID;
+    if (!apiKey || !placeId) {
+      return res.status(400).json({ error: "SerpApi key or Place ID not configured in .env" });
+    }
+
+    try {
+      // Fetch using SerpApi Google Maps Reviews Engine
+      const response = await fetch(`https://serpapi.com/search.json?engine=google_maps_reviews&place_id=${placeId}&api_key=${apiKey}`);
+      const data: any = await response.json();
+      
+      if (!data.reviews || data.reviews.length === 0) {
+        return res.status(404).json({ error: "No reviews found or invalid Place ID." });
+      }
+
+      // Parse and map SerpApi format to our structure
+      const formattedReviews = data.reviews.slice(0, 10).map((r: any) => ({
+        id: `rev-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+        name: r.user?.name || "Google User",
+        avatar: r.user?.thumbnail || "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop",
+        rating: r.rating,
+        date: r.date || "recently",
+        badge: "Verified Google Review",
+        service: "General",
+        comment: r.snippet || "Left a rating."
+      }));
+
+      const dbData = JSON.parse(fs.readFileSync(dbPath, "utf-8"));
+      dbData.reviews = formattedReviews;
+      fs.writeFileSync(dbPath, JSON.stringify(dbData, null, 2));
+      await syncToDrive(dbData);
+      
+      res.json({ success: true, reviews: formattedReviews });
+    } catch (error: any) {
+      console.error("Failed to sync reviews:", error);
+      res.status(500).json({ error: "Failed to fetch reviews from SerpApi." });
+    }
+  });
+
   app.post("/api/admin/upload", isAuthorized, upload.single('image'), async (req, res) => {
     if (!req.file) return res.status(400).json({ error: "No file uploaded" });
 

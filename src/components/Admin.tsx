@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { useData } from '../contexts/DataContext';
 import { Settings, Plus, Trash2, Save, LogOut, Loader2, Globe, Shield, DollarSign, Image as ImageIcon, MapPin, ExternalLink, Plane, Mail, Phone, Calendar } from 'lucide-react';
@@ -68,6 +68,22 @@ export function Admin() {
     } else {
       setStatus({ type: 'error', message: 'Failed to save changes.' });
     }
+  };
+
+  const handleSyncReviews = async () => {
+    try {
+      const res = await fetch('/api/admin/sync-reviews', { method: 'POST', credentials: 'include' });
+      const data = await res.json();
+      if (res.ok) {
+        setStatus({ type: 'success', message: 'Successfully synced latest reviews from Google!' });
+        refreshData();
+      } else {
+        setStatus({ type: 'error', message: data.error || 'Failed to sync reviews' });
+      }
+    } catch (error) {
+      setStatus({ type: 'error', message: 'Error syncing reviews' });
+    }
+    setTimeout(() => setStatus(null), 3000);
   };
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, target: 'hero' | 'logo' | 'popup' | { type: 'destination' | 'service' | 'package', id: string }) => {
@@ -403,13 +419,27 @@ export function Admin() {
                 </div>
               </section>
 
-              <div className="p-6 rounded-3xl bg-accent text-primary flex items-center justify-between">
+              <div className="p-6 rounded-3xl bg-accent text-primary flex items-center justify-between mb-8">
                  <div>
                     <p className="text-[10px] font-bold uppercase tracking-widest opacity-80 mb-1">Drive Storage</p>
                     <p className="font-bold">Google Cloud Sync</p>
                  </div>
                  <Shield size={24} />
               </div>
+
+              {/* Google Reviews Sync */}
+              <section className="p-8 rounded-3xl glass border border-white/10">
+                <h3 className="text-lg font-bold mb-6 flex items-center gap-2"><Globe size={18} className="text-accent" /> Live Google Reviews</h3>
+                <p className="text-sm font-light opacity-70 mb-6">
+                  Sync the latest 5 reviews directly from your Google Business Profile to keep your website up-to-date. (Requires API key in .env)
+                </p>
+                <button
+                  onClick={handleSyncReviews}
+                  className="w-full py-4 bg-white/5 border border-white/10 rounded-xl font-bold uppercase tracking-widest hover:bg-accent hover:text-primary hover:border-accent transition-all text-xs"
+                >
+                  Fetch Latest Reviews Now
+                </button>
+              </section>
             </div>
 
             {/* Main Content Area */}

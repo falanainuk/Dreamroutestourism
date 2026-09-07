@@ -18,6 +18,7 @@ import { FloatingActions } from './components/FloatingActions';
 import { BookingModal } from './components/BookingModal';
 import { Contact } from './components/Contact';
 import { Packages } from './components/Packages';
+import { GoogleReviews } from './components/GoogleReviews';
 import { ItemDetailModal } from './components/ItemDetailModal';
 import { AllPackages } from './pages/AllPackages';
 import { OfferPopup } from './components/OfferPopup';
@@ -84,25 +85,7 @@ function MainLayout() {
           onBookClick={() => setIsBookingOpen(true)} 
         />
         
-        {/* Experience Banner */}
-        <section className="relative h-[60vh] w-full flex items-center justify-center overflow-hidden">
-          <img 
-            src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=2070&auto=format&fit=crop" 
-            alt="Scenic view"
-            className="absolute inset-0 w-full h-full object-cover"
-            referrerPolicy="no-referrer"
-          />
-          <div className="absolute inset-0 bg-primary/40 backdrop-blur-[2px]" />
-          <div className="relative z-10 text-center px-6">
-            <h2 className="text-4xl md:text-6xl font-bold mb-8 uppercase tracking-widest text-white">Elevate Your Reality</h2>
-            <button 
-              onClick={() => setIsBookingOpen(true)}
-              className="bg-white text-primary px-12 py-5 rounded-full text-xs font-bold uppercase tracking-[0.2em] hover:bg-accent transition-colors duration-300"
-            >
-              Start Planning
-            </button>
-          </div>
-        </section>
+        <GoogleReviews />
 
         <Contact />
         

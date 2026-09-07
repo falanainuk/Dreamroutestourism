@@ -29,7 +29,7 @@
       "title": "Yacht Tours – Shared & Private",
       "description": "Sail the Dubai Marina or The Palm on a luxury yacht — available as shared or private charters.",
       "details": "Experience the ultimate luxury with our yacht tours. Whether you're looking for a romantic sunset cruise or a lively party with friends, our yachts offer the perfect setting. Available for shared or private charters, each tour includes professional crew and premium amenities.",
-      "image": "https://images.unsplash.com/photo-1567891740298-2a9711f05eb2",
+      "image": "/uploads/1788425331159-dream_routes_uae_tourist_visa_card.png",
       "price": 299
     },
     {
@@ -109,24 +109,6 @@
       "details": "Discover the capital of the UAE. Visit the breathtaking Sheikh Zayed Grand Mosque, the Louvre Abu Dhabi, and the luxurious Emirates Palace. A perfect blend of culture, history, and modern luxury.",
       "price": 199,
       "image": "https://images.unsplash.com/photo-1512632578888-169bbbc64f33"
-    },
-    {
-      "id": "5",
-      "name": "Switzerland",
-      "country": "Europe",
-      "departureType": "fixed",
-      "details": "Journey through the picturesque Swiss Alps. Enjoy scenic train rides, visit charming lakeside towns like Lucerne, and experience the majestic beauty of Jungfraujoch, the 'Top of Europe'.",
-      "price": 2750,
-      "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4"
-    },
-    {
-      "id": "6",
-      "name": "Maldives",
-      "country": "Island",
-      "departureType": "flexible",
-      "details": "Escape to the paradise of the Maldives. Relax in overwater villas, swim in crystal-clear turquoise waters, and enjoy world-class diving and snorkeling among vibrant coral reefs and marine life.",
-      "price": 1850,
-      "image": "https://images.unsplash.com/photo-1514282401047-d79a71a590e8"
     }
   ],
   "packages": [
@@ -167,5 +149,67 @@
       "image": "https://images.unsplash.com/photo-1526495124232-a04e1849168c"
     }
   ],
-  "enquiries": []
+  "enquiries": [],
+  "reviews": [
+    {
+      "id": "rev-1",
+      "name": "Mohammed Al Rashidi",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop",
+      "rating": 5,
+      "date": "a week ago",
+      "badge": "Local Guide • 23 reviews",
+      "service": "Desert Safari & BBQ",
+      "comment": "Excellent experience with Dream Routes Tourism! The desert safari was beyond expectations — dune bashing, camel riding, and an amazing BBQ dinner with cultural shows. Very professional team, punctual pickup, and great value for money. Highly recommended for anyone visiting Dubai!"
+    },
+    {
+      "id": "rev-2",
+      "name": "Priya Sharma",
+      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop",
+      "rating": 5,
+      "date": "2 weeks ago",
+      "badge": "Verified Reviewer",
+      "service": "Yacht Charter – Dubai Marina",
+      "comment": "We booked a private yacht for our anniversary through Dream Routes and it was absolutely magical. The yacht was clean and luxurious, the crew was friendly and attentive, and the sunset views over the Marina were stunning. Worth every dirham! Thank you team!"
+    },
+    {
+      "id": "rev-3",
+      "name": "James O'Brien",
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop",
+      "rating": 5,
+      "date": "3 weeks ago",
+      "badge": "Local Guide • 47 reviews",
+      "service": "Abu Dhabi City Tour",
+      "comment": "Booked the Abu Dhabi full-day tour and it was brilliantly organized. Our guide was very knowledgeable and passionate about UAE history. Sheikh Zayed Grand Mosque left us speechless. Smooth pickup from Dubai hotel, comfortable van, and great communication throughout. 5 stars!"
+    },
+    {
+      "id": "rev-4",
+      "name": "Fatima Al Zaabi",
+      "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop",
+      "rating": 5,
+      "date": "a month ago",
+      "badge": "Verified Reviewer",
+      "service": "Burj Khalifa Fast-Track",
+      "comment": "Dream Routes made our Dubai visit truly special. They arranged our Burj Khalifa tickets, visa, and hotel transfers all in one package at a very competitive price. No hidden costs, very transparent, and customer service was outstanding. Will use them again on my next trip!"
+    },
+    {
+      "id": "rev-5",
+      "name": "Lena Müller",
+      "avatar": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=200&auto=format&fit=crop",
+      "rating": 5,
+      "date": "a month ago",
+      "badge": "Local Guide • 11 reviews",
+      "service": "Dubai City Tour",
+      "comment": "First time in Dubai and Dream Routes made it unforgettable! The city tour covered Gold Souk, Spice Souk, the Creek, and modern Downtown. Our guide spoke excellent English and was so helpful with photo spots. Affordable prices and top-notch service. Strongly recommended!"
+    },
+    {
+      "id": "rev-6",
+      "name": "Rajesh Pillai",
+      "avatar": "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=200&auto=format&fit=crop",
+      "rating": 5,
+      "date": "2 months ago",
+      "badge": "Verified Reviewer",
+      "service": "Visa & Travel Services",
+      "comment": "Very reliable travel agency in Dubai. Dream Routes helped us with visit visas for 4 family members quickly and without any issues. They are professional, honest, and keep you updated throughout the process. Happy to recommend to anyone needing visa or travel assistance in the UAE."
+    }
+  ]
 }
