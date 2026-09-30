@@ -16,8 +16,8 @@ const __dirname = path.dirname(__filename);
 
 const upload = multer({ dest: path.join(__dirname, 'uploads/') });
 
-const supabaseUrl = 'https://tlppbrfdswunmuydumjx.supabase.co';
-const supabaseKey = 'sb_publishable_abUSzR2FqwnBEu9Znu2T5g_N6AB3cUN';
+const supabaseUrl = process.env.SUPABASE_URL || 'https://tlppbrfdswunmuydumjx.supabase.co';
+const supabaseKey = process.env.SUPABASE_KEY || 'sb_publishable_abUSzR2FqwnBEu9Znu2T5g_N6AB3cUN';
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 async function startServer() {
@@ -62,29 +62,49 @@ async function startServer() {
   };
 
   async function getDbData() {
+    // 1. Try Supabase first
     try {
       const { data, error } = await supabase.from('app_data').select('data').eq('id', 1).single();
-      if (error || !data) {
-        console.log("Supabase fetch failed or table empty, using default data.", error?.message);
-        return defaultData;
+      if (!error && data && Object.keys(data.data || {}).length > 0) {
+        return data.data;
       }
-      // If the data object is totally empty, return defaultData instead
-      if (Object.keys(data.data || {}).length === 0) {
-        return defaultData;
-      }
-      return data.data;
+      if (error) console.warn("Supabase read error:", error.message);
     } catch(e) {
-      console.error("Exception reading from Supabase", e);
-      return defaultData;
+      console.error("Supabase exception:", e);
     }
+
+    // 2. Fall back to local db.json if it exists
+    if (fs.existsSync(dbPath)) {
+      try {
+        const fileData = JSON.parse(fs.readFileSync(dbPath, 'utf-8'));
+        if (Object.keys(fileData).length > 0) {
+          console.log("Falling back to local db.json");
+          return fileData;
+        }
+      } catch(e) {
+        console.error("db.json read error:", e);
+      }
+    }
+
+    // 3. Last resort: use hardcoded defaults
+    console.log("Using hardcoded default data");
+    return defaultData;
   }
 
   async function saveDbData(newData: any) {
+    // Always write to local db.json as backup
+    try {
+      fs.writeFileSync(dbPath, JSON.stringify(newData, null, 2));
+    } catch(e) {
+      console.error("Failed to write local db.json", e);
+    }
+
+    // Also save to Supabase
     try {
       const { error } = await supabase.from('app_data').upsert({ id: 1, data: newData });
-      if (error) console.error("Failed to save to Supabase", error);
+      if (error) console.error("Failed to save to Supabase:", error);
     } catch(e) {
-      console.error("Exception saving to Supabase", e);
+      console.error("Exception saving to Supabase:", e);
     }
   }
 
