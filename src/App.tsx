@@ -22,6 +22,7 @@ import { GoogleReviews } from './components/GoogleReviews';
 import { ItemDetailModal } from './components/ItemDetailModal';
 import { AllPackages } from './pages/AllPackages';
 import { OfferPopup } from './components/OfferPopup';
+import { VCardPage } from './pages/VCardPage';
 
 function MainLayout() {
   const { data, loading } = useData();
@@ -151,6 +152,7 @@ function AppContent() {
         <Route path="/" element={<MainLayout />} />
         <Route path="/packages" element={<AllPackages />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/dreamroutes" element={<VCardPage />} />
       </Routes>
     </Router>
   );

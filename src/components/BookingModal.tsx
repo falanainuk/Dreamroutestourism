@@ -11,17 +11,26 @@ interface BookingModalProps {
 export function BookingModal({ isOpen, onClose }: BookingModalProps) {
   const { data } = useData();
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
     const formData = new FormData(e.target as HTMLFormElement);
     const data = Object.fromEntries(formData.entries());
 
     try {
-      const res = await fetch('/api/enquiries', {
+      const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          access_key: 'ac92ac9a-c19a-4d16-beca-48430c2864ba',
+          subject: 'New Booking Request from Dream Routes Tourism Website',
+          ...data
+        })
       });
 
       if (res.ok) {
@@ -33,6 +42,8 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
       }
     } catch (err) {
       console.error("Booking error:", err);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -121,8 +132,12 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
                     <textarea name="message" rows={4} className="w-full bg-primary/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors resize-none" placeholder="Tell us about your dream trip..."></textarea>
                   </div>
 
-                  <button type="submit" className="w-full bg-accent text-primary py-4 rounded-lg font-bold uppercase tracking-widest hover:bg-white transition-colors duration-300">
-                    Request Booking
+                  <button 
+                    type="submit" 
+                    disabled={isSubmitting}
+                    className="w-full bg-accent text-primary py-4 rounded-lg font-bold uppercase tracking-widest hover:bg-white transition-colors duration-300 disabled:opacity-70 disabled:cursor-not-allowed"
+                  >
+                    {isSubmitting ? "Sending..." : "Request Booking"}
                   </button>
                 </form>
               </>

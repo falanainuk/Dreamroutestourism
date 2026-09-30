@@ -30,6 +30,7 @@ export function Navbar({ onBookClick }: NavbarProps) {
     { name: 'Services', href: '/#services' },
     { name: 'About', href: '/#about' },
     { name: 'Contact', href: '/#contact' },
+    { name: 'Connect', href: '/dreamroutes' },
   ];
 
   return (
