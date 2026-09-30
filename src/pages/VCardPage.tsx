@@ -98,13 +98,13 @@ export function VCardPage() {
           <div className="pt-6">
             <p className="text-center text-sm text-white/60 font-bold uppercase tracking-[0.25em] mb-5">Connect With Us</p>
             <div className="flex justify-center gap-5">
-              <a href="#" className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 flex items-center justify-center text-white hover:shadow-lg hover:shadow-pink-500/40 hover:-translate-y-2 transition-all duration-300">
+              <a href="https://www.instagram.com/dreamroutestourism/" target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 flex items-center justify-center text-white hover:shadow-lg hover:shadow-pink-500/40 hover:-translate-y-2 transition-all duration-300">
                 <Instagram size={28} />
               </a>
-              <a href="#" className="w-14 h-14 rounded-2xl bg-[#0A66C2] flex items-center justify-center text-white hover:shadow-lg hover:shadow-blue-500/40 hover:-translate-y-2 transition-all duration-300">
+              <a href="https://ae.linkedin.com/company/dream-routes-tourism-llc" target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-2xl bg-[#0A66C2] flex items-center justify-center text-white hover:shadow-lg hover:shadow-blue-500/40 hover:-translate-y-2 transition-all duration-300">
                 <Linkedin size={28} />
               </a>
-              <a href="#" className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#00f2fe] via-black to-[#fe0979] flex items-center justify-center text-white hover:shadow-lg hover:shadow-pink-500/40 hover:-translate-y-2 transition-all duration-300">
+              <a href="https://www.tiktok.com/@dreamroutestourism" target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#00f2fe] via-black to-[#fe0979] flex items-center justify-center text-white hover:shadow-lg hover:shadow-pink-500/40 hover:-translate-y-2 transition-all duration-300">
                 <Music2 size={28} />
               </a>
             </div>
