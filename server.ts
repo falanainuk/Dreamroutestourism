@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import { google } from "googleapis";
 import dotenv from "dotenv";
 import multer from "multer";
+import { createClient } from "@supabase/supabase-js";
 
 dotenv.config();
 
@@ -14,6 +15,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const upload = multer({ dest: path.join(__dirname, 'uploads/') });
+
+const supabaseUrl = 'https://tlppbrfdswunmuydumjx.supabase.co';
+const supabaseKey = 'sb_publishable_abUSzR2FqwnBEu9Znu2T5g_N6AB3cUN';
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 async function startServer() {
   const app = express();
@@ -24,7 +29,6 @@ async function startServer() {
   app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
   // --- DATABASE SETUP ---
-  const dbPath = path.join(__dirname, "db.json");
   const uploadsDir = path.join(__dirname, "uploads");
   
   if (!fs.existsSync(uploadsDir)) {
@@ -57,9 +61,40 @@ async function startServer() {
     ]
   };
 
-  if (!fs.existsSync(dbPath)) {
-    fs.writeFileSync(dbPath, JSON.stringify(defaultData, null, 2));
+  async function getDbData() {
+    try {
+      const { data, error } = await supabase.from('app_data').select('data').eq('id', 1).single();
+      if (error || !data) {
+        console.log("Supabase fetch failed or table empty, using default data.", error?.message);
+        return defaultData;
+      }
+      // If the data object is totally empty, return defaultData instead
+      if (Object.keys(data.data || {}).length === 0) {
+        return defaultData;
+      }
+      return data.data;
+    } catch(e) {
+      console.error("Exception reading from Supabase", e);
+      return defaultData;
+    }
   }
+
+  async function saveDbData(newData: any) {
+    try {
+      const { error } = await supabase.from('app_data').upsert({ id: 1, data: newData });
+      if (error) console.error("Failed to save to Supabase", error);
+    } catch(e) {
+      console.error("Exception saving to Supabase", e);
+    }
+  }
+
+  // Seed default data if database is empty on start
+  getDbData().then(async (data) => {
+    if (data === defaultData) {
+      console.log("Seeding initial data to Supabase...");
+      await saveDbData(defaultData);
+    }
+  });
 
   // --- GOOGLE DRIVE LOGIC ---
   async function getDriveAuth() {
@@ -124,7 +159,6 @@ async function startServer() {
 
   // --- API ROUTES ---
 
-  // Auth middleware to check session BEFORE file processing
   const isAuthorized = (req: any, res: any, next: any) => {
     if (req.cookies.admin_session === "is_admin") {
       next();
@@ -134,7 +168,7 @@ async function startServer() {
   };
 
   app.get("/api/data", async (req, res) => {
-    res.json(JSON.parse(fs.readFileSync(dbPath, "utf-8")));
+    res.json(await getDbData());
   });
 
   app.post("/api/admin/login", (req, res) => {
@@ -165,7 +199,7 @@ async function startServer() {
 
   app.post("/api/admin/update", isAuthorized, async (req, res) => {
     const newData = req.body;
-    fs.writeFileSync(dbPath, JSON.stringify(newData, null, 2));
+    await saveDbData(newData);
     await syncToDrive(newData);
     res.json({ success: true });
   });
@@ -178,7 +212,6 @@ async function startServer() {
     }
 
     try {
-      // Fetch using SerpApi Google Maps Reviews Engine
       const response = await fetch(`https://serpapi.com/search.json?engine=google_maps_reviews&place_id=${placeId}&api_key=${apiKey}`);
       const data: any = await response.json();
       
@@ -186,7 +219,6 @@ async function startServer() {
         return res.status(404).json({ error: "No reviews found or invalid Place ID." });
       }
 
-      // Parse and map SerpApi format to our structure
       const formattedReviews = data.reviews.slice(0, 10).map((r: any) => ({
         id: `rev-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
         name: r.user?.name || "Google User",
@@ -198,9 +230,9 @@ async function startServer() {
         comment: r.snippet || "Left a rating."
       }));
 
-      const dbData = JSON.parse(fs.readFileSync(dbPath, "utf-8"));
+      const dbData = await getDbData();
       dbData.reviews = formattedReviews;
-      fs.writeFileSync(dbPath, JSON.stringify(dbData, null, 2));
+      await saveDbData(dbData);
       await syncToDrive(dbData);
       
       res.json({ success: true, reviews: formattedReviews });
@@ -215,7 +247,6 @@ async function startServer() {
 
     let url = "";
 
-    // Try Google Drive if credentials exist
     if (process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL && process.env.GOOGLE_PRIVATE_KEY) {
       try {
         url = await uploadToDrive(req.file.path, req.file.originalname) || "";
@@ -225,7 +256,6 @@ async function startServer() {
     }
 
     if (!url) {
-      // Use local storage fallback
       const fileName = `${Date.now()}-${req.file.originalname.replace(/\s+/g, '-')}`;
       const targetPath = path.join(__dirname, "uploads", fileName);
       
@@ -234,13 +264,11 @@ async function startServer() {
         url = `/uploads/${fileName}`;
       } catch (e) {
         console.error("Local rename failed:", e);
-        // last resort: base64 (not ideal but works)
         const base64 = fs.readFileSync(req.file.path, { encoding: 'base64' });
         url = `data:${req.file.mimetype};base64,${base64}`;
         fs.unlinkSync(req.file.path);
       }
     } else {
-      // Drive upload succeeded, remove the temp file
       if (fs.existsSync(req.file.path)) {
         fs.unlinkSync(req.file.path);
       }
@@ -259,32 +287,28 @@ async function startServer() {
       status: "new"
     };
 
-    const data = JSON.parse(fs.readFileSync(dbPath, "utf-8"));
+    const data = await getDbData();
     if (!data.enquiries) data.enquiries = [];
     data.enquiries.unshift(enquiry);
-    fs.writeFileSync(dbPath, JSON.stringify(data, null, 2));
+    await saveDbData(data);
 
-    // Mock Email Logic
     console.log(`[MOCK EMAIL] Confirmation sent to: ${enquiry.email}`);
-    console.log(`[MOCK EMAIL] Content: Thank you ${enquiry.name}, we have received your request for ${enquiry.destination || 'service'}.`);
-
     res.json({ success: true });
   });
 
-  app.get("/api/admin/enquiries", isAuthorized, (req, res) => {
-    const data = JSON.parse(fs.readFileSync(dbPath, "utf-8"));
+  app.get("/api/admin/enquiries", isAuthorized, async (req, res) => {
+    const data = await getDbData();
     res.json(data.enquiries || []);
   });
 
-  app.post("/api/admin/enquiries/delete", isAuthorized, (req, res) => {
+  app.post("/api/admin/enquiries/delete", isAuthorized, async (req, res) => {
     const { id } = req.body;
-    const data = JSON.parse(fs.readFileSync(dbPath, "utf-8"));
+    const data = await getDbData();
     data.enquiries = (data.enquiries || []).filter((e: any) => e.id !== id);
-    fs.writeFileSync(dbPath, JSON.stringify(data, null, 2));
+    await saveDbData(data);
     res.json({ success: true });
   });
 
-  // Global error handler for API to return JSON instead of HTML
   app.use("/api", (err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
     console.error("API Error:", err);
     res.status(err.status || 500).json({ 
