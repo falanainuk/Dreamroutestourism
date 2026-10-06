@@ -14,6 +14,8 @@ dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+const dbPath = path.join(__dirname, 'db.json');
+
 const upload = multer({ dest: path.join(__dirname, 'uploads/') });
 
 const supabaseUrl = process.env.SUPABASE_URL || 'https://tlppbrfdswunmuydumjx.supabase.co';
