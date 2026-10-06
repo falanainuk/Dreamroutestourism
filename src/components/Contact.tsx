@@ -64,7 +64,7 @@ export function Contact() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="text-gray-400 font-light leading-relaxed mb-12 max-w-md"
+              className="text-text/60 font-light leading-relaxed mb-12 max-w-md"
             >
               Whether you need to plan a luxury getaway, manage corporate travel, or secure a visa, our team is here to help make your dream route a reality.
             </motion.p>
@@ -92,12 +92,12 @@ export function Contact() {
               ].map((item, i) => {
                 const innerContent = (
                   <>
-                    <div className="w-14 h-14 shrink-0 rounded-2xl bg-surface/80 border border-white/5 flex items-center justify-center group-hover:border-accent/30 group-hover:bg-accent/10 transition-colors duration-300">
+                    <div className="w-14 h-14 shrink-0 rounded-2xl bg-surface/80 border border-text/10 flex items-center justify-center group-hover:border-accent/30 group-hover:bg-accent/10 transition-colors duration-300">
                       {item.icon}
                     </div>
                     <div>
                       <h4 className="text-lg font-bold mb-1 group-hover:text-accent transition-colors duration-300">{item.title}</h4>
-                      <p className="text-gray-400 font-light">{item.content}</p>
+                      <p className="text-text/60 font-light">{item.content}</p>
                     </div>
                   </>
                 );
@@ -134,50 +134,50 @@ export function Contact() {
             transition={{ delay: 0.4 }}
             className="flex-1"
           >
-            <div className="bg-surface/80 backdrop-blur-xl border border-white/10 p-8 md:p-12 rounded-3xl shadow-2xl relative">
+            <div className="bg-surface/80 backdrop-blur-xl border border-text/10 p-8 md:p-12 rounded-3xl shadow-2xl relative">
               {/* Decorative accent element */}
               <div className="absolute -top-4 -right-4 w-24 h-24 bg-accent/20 rounded-full blur-[20px]" />
               
               <form onSubmit={onSubmit} className="relative z-10 flex flex-col gap-6">
                 <input type="hidden" name="subject" value="New Inquiry from Dream Routes Tourism Website" />
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Your Name</label>
+                  <label className="block text-xs font-bold uppercase tracking-widest text-text/60 mb-2">Your Name</label>
                   <input 
                     type="text" 
                     name="name"
                     required
                     placeholder="John Doe"
-                    className="w-full bg-primary/50 border border-white/10 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-accent/50 transition-colors"
+                    className="w-full bg-text/5 border border-text/10 rounded-xl px-4 py-4 text-text placeholder:text-text/40 focus:outline-none focus:border-accent/50 transition-colors"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Your Email</label>
+                  <label className="block text-xs font-bold uppercase tracking-widest text-text/60 mb-2">Your Email</label>
                   <input 
                     type="email" 
                     name="email"
                     required
                     placeholder="john@example.com"
-                    className="w-full bg-primary/50 border border-white/10 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-accent/50 transition-colors"
+                    className="w-full bg-text/5 border border-text/10 rounded-xl px-4 py-4 text-text placeholder:text-text/40 focus:outline-none focus:border-accent/50 transition-colors"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Your Phone</label>
+                  <label className="block text-xs font-bold uppercase tracking-widest text-text/60 mb-2">Your Phone</label>
                   <input 
                     type="tel" 
                     name="phone"
                     required
                     placeholder="+971 XX XXX XXXX"
-                    className="w-full bg-primary/50 border border-white/10 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-accent/50 transition-colors"
+                    className="w-full bg-text/5 border border-text/10 rounded-xl px-4 py-4 text-text placeholder:text-text/40 focus:outline-none focus:border-accent/50 transition-colors"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Your Message</label>
+                  <label className="block text-xs font-bold uppercase tracking-widest text-text/60 mb-2">Your Message</label>
                   <textarea 
                     name="message"
                     required
                     rows={4}
                     placeholder="How can we help you plan your journey?"
-                    className="w-full bg-primary/50 border border-white/10 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-accent/50 transition-colors resize-none"
+                    className="w-full bg-text/5 border border-text/10 rounded-xl px-4 py-4 text-text placeholder:text-text/40 focus:outline-none focus:border-accent/50 transition-colors resize-none"
                   ></textarea>
                 </div>
                 <button 

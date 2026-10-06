@@ -43,13 +43,13 @@ export function Destinations({ onItemClick, onBookClick }: { onItemClick?: (item
               <span className="font-serif italic text-accent">Destinations</span>
             </motion.h2>
 
-            <div className="flex gap-2 p-1 bg-surface border border-white/5 rounded-full w-fit">
+            <div className="flex gap-2 p-1 bg-surface border border-text/5 rounded-full w-fit">
               {(['all', 'fixed', 'flexible'] as const).map((type) => (
                 <button
                   key={type}
                   onClick={() => { setFilter(type); setCurrentIndex(0); }}
                   className={`px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all ${
-                    filter === type ? 'bg-accent text-primary' : 'hover:bg-white/5 text-gray-500'
+                    filter === type ? 'bg-accent text-primary' : 'hover:bg-text/5 text-text/50'
                   }`}
                 >
                   {type === 'all' ? 'All Tours' : `${type} departure`}
@@ -75,7 +75,7 @@ export function Destinations({ onItemClick, onBookClick }: { onItemClick?: (item
           <button
             onClick={prev}
             disabled={currentIndex === 0}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-5 z-20 w-12 h-12 rounded-full bg-surface border border-white/10 flex items-center justify-center text-white hover:bg-accent hover:text-primary hover:border-accent transition-all duration-300 shadow-xl disabled:opacity-20 disabled:cursor-not-allowed"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-5 z-20 w-12 h-12 rounded-full bg-surface border border-text/10 flex items-center justify-center text-text hover:bg-accent hover:text-primary hover:border-accent transition-all duration-300 shadow-xl disabled:opacity-20 disabled:cursor-not-allowed"
             aria-label="Previous destinations"
           >
             <ChevronLeft size={22} />
@@ -149,7 +149,7 @@ export function Destinations({ onItemClick, onBookClick }: { onItemClick?: (item
           <button
             onClick={next}
             disabled={currentIndex >= maxIndex}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-5 z-20 w-12 h-12 rounded-full bg-surface border border-white/10 flex items-center justify-center text-white hover:bg-accent hover:text-primary hover:border-accent transition-all duration-300 shadow-xl disabled:opacity-20 disabled:cursor-not-allowed"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-5 z-20 w-12 h-12 rounded-full bg-surface border border-text/10 flex items-center justify-center text-text hover:bg-accent hover:text-primary hover:border-accent transition-all duration-300 shadow-xl disabled:opacity-20 disabled:cursor-not-allowed"
             aria-label="Next destinations"
           >
             <ChevronRight size={22} />
@@ -163,7 +163,7 @@ export function Destinations({ onItemClick, onBookClick }: { onItemClick?: (item
                   key={i}
                   onClick={() => setCurrentIndex(i)}
                   className={`h-1.5 rounded-full transition-all duration-300 ${
-                    i === currentIndex ? 'w-8 bg-accent' : 'w-2 bg-white/20'
+                    i === currentIndex ? 'w-8 bg-accent' : 'w-2 bg-text/20'
                   }`}
                   aria-label={`Go to slide ${i + 1}`}
                 />

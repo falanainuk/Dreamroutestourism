@@ -62,7 +62,7 @@ function MainLayout() {
                 We believe travel should be an <br />
                 <span className="font-serif italic text-accent underline decoration-accent/30 underline-offset-8">extension of your lifestyle</span>
               </h2>
-              <p className="text-gray-400 text-lg md:text-xl font-light leading-relaxed mb-12">
+              <p className="text-text/60 text-lg md:text-xl font-light leading-relaxed mb-12">
                 {data?.settings.description}
               </p>
               <div className="flex justify-center items-center gap-12 grayscale opacity-50 overflow-x-auto pb-4">

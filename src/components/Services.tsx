@@ -41,7 +41,7 @@ export function Services({ onBookClick }: { onBookClick?: (service: any) => void
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="group p-0 rounded-3xl bg-primary/20 border border-white/5 hover:border-accent/30 transition-all duration-300 hover:shadow-2xl hover:shadow-accent/5 backdrop-blur-md overflow-hidden"
+              className="group p-0 rounded-3xl bg-text/5 border border-text/5 hover:border-accent/30 transition-all duration-300 hover:shadow-2xl hover:shadow-accent/5 backdrop-blur-md overflow-hidden"
             >
               <div className="h-48 overflow-hidden relative">
                 <img 
@@ -57,7 +57,7 @@ export function Services({ onBookClick }: { onBookClick?: (service: any) => void
 
               <div className="p-10">
                 <h3 className="text-xl font-bold mb-4">{service.title}</h3>
-                <p className="text-gray-400 font-light leading-relaxed mb-6 line-clamp-2">
+                <p className="text-text/60 font-light leading-relaxed mb-6 line-clamp-2">
                   {service.description}
                 </p>
                 <div className="flex items-center justify-between">

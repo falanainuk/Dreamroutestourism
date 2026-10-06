@@ -63,13 +63,13 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            className="relative w-full max-w-2xl bg-surface border border-white/10 rounded-2xl p-6 md:p-8 overflow-hidden shadow-2xl max-h-[90vh] overflow-y-auto custom-scrollbar"
+            className="relative w-full max-w-2xl bg-surface border border-text/10 rounded-2xl p-6 md:p-8 overflow-hidden shadow-2xl max-h-[90vh] overflow-y-auto custom-scrollbar"
           >
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 p-2 rounded-full hover:bg-white/10 transition-colors"
+              className="absolute top-4 right-4 p-2 rounded-full hover:bg-text/10 transition-colors"
             >
-              <X size={20} className="text-gray-400" />
+              <X size={20} className="text-text/60" />
             </button>
 
             {isSubmitted ? (
@@ -82,7 +82,7 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
                   <CheckCircle2 size={40} className="text-accent" />
                 </div>
                 <h3 className="text-3xl font-bold mb-4">Request Sent!</h3>
-                <p className="text-gray-400 max-w-md">
+                <p className="text-text/60 max-w-md">
                   Thank you for choosing {data?.settings.siteName || 'us'}. Our luxury travel concierges will review your request and contact you shortly.
                 </p>
               </motion.div>
@@ -93,26 +93,26 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
                     <Plane className="text-accent -rotate-45" size={24} />
                     <h2 className="text-2xl font-bold uppercase tracking-widest">Start Your Journey</h2>
                   </div>
-                  <p className="text-gray-400 font-light">Fill out the form below to connect with our elite travel designers.</p>
+                  <p className="text-text/60 font-light">Fill out the form below to connect with our elite travel designers.</p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label className="text-sm text-gray-400 flex items-center gap-2"><User size={14} /> Full Name</label>
-                      <input name="name" required type="text" className="w-full bg-primary/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors" placeholder="John Doe" />
+                      <label className="text-sm text-text/60 flex items-center gap-2"><User size={14} /> Full Name</label>
+                      <input name="name" required type="text" className="w-full bg-text/5 border border-text/10 rounded-lg px-4 py-3 text-text placeholder:text-text/40 focus:outline-none focus:border-accent transition-colors" placeholder="John Doe" />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-sm text-gray-400 flex items-center gap-2"><Mail size={14} /> Email Address</label>
-                      <input name="email" required type="email" className="w-full bg-primary/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors" placeholder="john@example.com" />
+                      <label className="text-sm text-text/60 flex items-center gap-2"><Mail size={14} /> Email Address</label>
+                      <input name="email" required type="email" className="w-full bg-text/5 border border-text/10 rounded-lg px-4 py-3 text-text placeholder:text-text/40 focus:outline-none focus:border-accent transition-colors" placeholder="john@example.com" />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-sm text-gray-400 flex items-center gap-2"><Phone size={14} /> Phone Number</label>
-                      <input name="phone" required type="tel" className="w-full bg-primary/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors" placeholder="+1 234 567 890" />
+                      <label className="text-sm text-text/60 flex items-center gap-2"><Phone size={14} /> Phone Number</label>
+                      <input name="phone" required type="tel" className="w-full bg-text/5 border border-text/10 rounded-lg px-4 py-3 text-text placeholder:text-text/40 focus:outline-none focus:border-accent transition-colors" placeholder="+1 234 567 890" />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-sm text-gray-400 flex items-center gap-2"><MapPin size={14} /> Destination</label>
-                      <select name="destination" className="w-full bg-primary/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors appearance-none">
+                      <label className="text-sm text-text/60 flex items-center gap-2"><MapPin size={14} /> Destination</label>
+                      <select name="destination" className="w-full bg-text/5 border border-text/10 rounded-lg px-4 py-3 text-text focus:outline-none focus:border-accent transition-colors appearance-none">
                         <option value="">Select Destination</option>
                         {data?.destinations.map(d => (
                           <option key={d.id} value={d.name}>{d.name}, {d.country}</option>
@@ -123,13 +123,13 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-sm text-gray-400 flex items-center gap-2"><Calendar size={14} /> Preferred Dates</label>
-                    <input name="dates" type="text" className="w-full bg-primary/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors" placeholder="e.g. Mid-August or Exact Dates" />
+                    <label className="text-sm text-text/60 flex items-center gap-2"><Calendar size={14} /> Preferred Dates</label>
+                    <input name="dates" type="text" className="w-full bg-text/5 border border-text/10 rounded-lg px-4 py-3 text-text placeholder:text-text/40 focus:outline-none focus:border-accent transition-colors" placeholder="e.g. Mid-August or Exact Dates" />
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-sm text-gray-400 flex items-center gap-2"><MessageSquare size={14} /> Special Requests / Details</label>
-                    <textarea name="message" rows={4} className="w-full bg-primary/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors resize-none" placeholder="Tell us about your dream trip..."></textarea>
+                    <label className="text-sm text-text/60 flex items-center gap-2"><MessageSquare size={14} /> Special Requests / Details</label>
+                    <textarea name="message" rows={4} className="w-full bg-text/5 border border-text/10 rounded-lg px-4 py-3 text-text placeholder:text-text/40 focus:outline-none focus:border-accent transition-colors resize-none" placeholder="Tell us about your dream trip..."></textarea>
                   </div>
 
                   <button 

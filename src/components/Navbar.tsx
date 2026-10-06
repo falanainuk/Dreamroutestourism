@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Plane, Menu, X, Sun, Moon } from 'lucide-react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { useTheme } from '../contexts/ThemeContext';
 import { useData } from '../contexts/DataContext';
@@ -37,23 +37,18 @@ export function Navbar({ onBookClick }: NavbarProps) {
     <nav 
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-500 py-6",
-        isScrolled ? "bg-surface/90 backdrop-blur-lg py-4 border-b border-white/10" : "bg-transparent"
+        isScrolled ? "bg-surface/90 backdrop-blur-lg py-4 border-b border-text/10" : "bg-transparent"
       )}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2 group cursor-pointer">
-          {data?.settings.logo ? (
-            <div className="group-hover:scale-110 transition-transform duration-300">
-              <img src={data.settings.logo} alt="Logo" className="w-8 h-8 object-contain" />
-            </div>
-          ) : (
-            <div className="w-10 h-10 bg-accent rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-              <Plane className="text-primary w-6 h-6 -rotate-45" />
-            </div>
-          )}
-          <span className="text-xl font-bold tracking-tighter uppercase whitespace-nowrap">
-            {data?.settings.siteName || 'Dream Route'}
-          </span>
+        <Link to="/" className="flex items-center gap-3 group cursor-pointer">
+          <div className="group-hover:scale-105 transition-transform duration-300 flex-shrink-0">
+            <img
+              src={data?.settings.logo || '/logo.png'}
+              alt={data?.settings.siteName || 'Dream Routes Tourism'}
+              className="h-12 w-auto object-contain"
+            />
+          </div>
         </Link>
 
         {/* Desktop Nav */}
@@ -62,7 +57,7 @@ export function Navbar({ onBookClick }: NavbarProps) {
             <a 
               key={link.name} 
               href={link.href}
-              className="text-sm font-medium tracking-widest uppercase hover:text-accent transition-colors duration-300 pointer-events-auto"
+              className="text-sm font-medium tracking-widest uppercase text-text hover:text-accent transition-colors duration-300 pointer-events-auto"
             >
               {link.name}
             </a>
@@ -112,7 +107,7 @@ export function Navbar({ onBookClick }: NavbarProps) {
                   key={link.name} 
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-lg font-medium tracking-widest uppercase py-2 border-b border-white/5"
+                  className="text-lg font-medium tracking-widest uppercase py-2 border-b border-black/10 dark:border-white/5 text-text"
                 >
                   {link.name}
                 </a>
