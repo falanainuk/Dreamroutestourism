@@ -104,7 +104,6 @@ export function Destinations({ onItemClick, onBookClick }: { onItemClick?: (item
                       src={dest.image}
                       alt={dest.name}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                      referrerPolicy="no-referrer"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-primary via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
 

@@ -1,4 +1,4 @@
-﻿import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { X, ArrowUpRight } from "lucide-react";
 import { useData } from "../contexts/DataContext";
@@ -59,7 +59,6 @@ export function OfferPopup({ onContactClick }: OfferPopupProps) {
                   src={image}
                   alt={title}
                   className="w-full h-full object-cover"
-                  referrerPolicy="no-referrer"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/20 to-transparent" />
               </div>

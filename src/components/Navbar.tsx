@@ -46,7 +46,7 @@ export function Navbar({ onBookClick }: NavbarProps) {
             <img
               src={data?.settings.logo || '/logo.png'}
               alt={data?.settings.siteName || 'Dream Routes Tourism'}
-              className="h-12 w-auto object-contain"
+              className="h-12 w-auto object-contain bg-white p-1 rounded-md"
             />
           </div>
         </Link>

@@ -14,7 +14,6 @@ export function Hero({ onBookClick }: { onBookClick?: () => void }) {
           src={heroImage} 
           alt="Luxury Resort" 
           className="w-full h-full object-cover scale-105"
-          referrerPolicy="no-referrer"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-primary/60 via-primary/40 to-primary" />
         <div className="absolute inset-0 bg-black/20" />
