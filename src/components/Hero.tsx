@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { ArrowRight, Plane, Shield, Globe, Compass, Sparkles } from 'lucide-react';
+import { ArrowRight, Plane, Shield, Globe } from 'lucide-react';
 import { useData } from '../contexts/DataContext';
 
 export function Hero({ onBookClick }: { onBookClick?: () => void }) {
@@ -21,55 +21,6 @@ export function Hero({ onBookClick }: { onBookClick?: () => void }) {
 
       {/* Content */}
       <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
-        {/* Floating Creative Badge Left */}
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0, y: [0, -10, 0] }}
-          transition={{
-            opacity: { duration: 1, delay: 0.8 },
-            x: { duration: 1, delay: 0.8 },
-            y: { duration: 4, repeat: Infinity, ease: 'easeInOut' }
-          }}
-          className="hidden xl:flex absolute -left-16 top-1/3 items-center gap-3.5 px-5 py-3.5 rounded-2xl border backdrop-blur-xl pointer-events-none"
-          style={{
-            borderColor: 'rgba(200,169,110,0.25)',
-            background: 'linear-gradient(135deg, rgba(16,28,45,0.75) 0%, rgba(8,14,24,0.9) 100%)',
-            boxShadow: '0 20px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(200,169,110,0.3)',
-          }}
-        >
-          <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-[#C8A96E]/15 text-[#C8A96E] border border-[#C8A96E]/20">
-            <Compass className="animate-[spin_12s_linear_infinite]" size={20} />
-          </div>
-          <div className="text-left">
-            <p className="text-[9px] uppercase tracking-widest font-semibold text-[#C8A96E]/80">Active Route</p>
-            <p className="text-xs font-semibold text-[#F0EDE8]">Dubai → Switzerland</p>
-          </div>
-        </motion.div>
-
-        {/* Floating Creative Badge Right */}
-        <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          animate={{ opacity: 1, x: 0, y: [0, 10, 0] }}
-          transition={{
-            opacity: { duration: 1, delay: 0.9 },
-            x: { duration: 1, delay: 0.9 },
-            y: { duration: 4.5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }
-          }}
-          className="hidden xl:flex absolute -right-16 top-1/3 items-center gap-3.5 px-5 py-3.5 rounded-2xl border backdrop-blur-xl pointer-events-none"
-          style={{
-            borderColor: 'rgba(200,169,110,0.25)',
-            background: 'linear-gradient(135deg, rgba(16,28,45,0.75) 0%, rgba(8,14,24,0.9) 100%)',
-            boxShadow: '0 20px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(200,169,110,0.3)',
-          }}
-        >
-          <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-[#C8A96E]/15 text-[#C8A96E] border border-[#C8A96E]/20">
-            <Sparkles className="animate-pulse" size={20} />
-          </div>
-          <div className="text-left">
-            <p className="text-[9px] uppercase tracking-widest font-semibold text-[#C8A96E]/80">VIP Concierge</p>
-            <p className="text-xs font-semibold text-[#F0EDE8]">Bespoke Luxury</p>
-          </div>
-        </motion.div>
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
