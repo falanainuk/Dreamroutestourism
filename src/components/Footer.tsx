@@ -7,46 +7,86 @@ export function Footer() {
 
   const socialIcons = [
     { Icon: Instagram, href: socials?.instagram },
-    { Icon: Twitter, href: socials?.twitter },
-    { Icon: Facebook, href: socials?.facebook },
+    { Icon: Twitter,   href: socials?.twitter   },
+    { Icon: Facebook,  href: socials?.facebook  },
   ];
 
   return (
-    <footer id="contact" className="bg-primary pt-24 pb-12 border-t border-text/10">
-      <div className="max-w-7xl mx-auto px-6">
+    <footer
+      id="contact"
+      className="pt-24 pb-12"
+      style={{ background: 'var(--surface)', borderTop: '1px solid rgba(200,169,110,0.1)' }}
+    >
+      <div className="max-w-6xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
+
+          {/* Brand */}
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-3 mb-8">
+            <div className="flex items-center gap-3 mb-6">
               <img
                 src={data?.settings.logo || '/logo.png'}
                 alt={data?.settings.siteName || 'Dream Routes Tourism'}
-                className="h-12 w-auto object-contain"
+                className="h-10 w-auto object-contain"
+                style={{ background: 'white', padding: '4px', borderRadius: '6px' }}
               />
             </div>
-            <p className="text-text/60 text-lg max-w-md leading-relaxed font-light mb-8">
+            <p className="text-lg max-w-sm leading-relaxed font-light mb-8" style={{ color: 'rgba(240,237,232,0.5)' }}>
               {data?.settings.description}
             </p>
-            <div className="flex gap-4">
+            <div className="flex gap-3">
               {socialIcons.map(({ Icon, href }, i) => (
-                <a key={i} href={href} className="w-12 h-12 rounded-full border border-text/20 flex items-center justify-center hover:bg-accent hover:text-primary hover:border-accent transition-all duration-300 text-text">
-                  <Icon size={20} />
+                <a
+                  key={i}
+                  href={href}
+                  className="w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 hover:-translate-y-0.5"
+                  style={{
+                    border: '1px solid rgba(200,169,110,0.2)',
+                    color: 'rgba(240,237,232,0.55)',
+                    background: 'rgba(200,169,110,0.05)',
+                  }}
+                  onMouseEnter={e => {
+                    const el = e.currentTarget as HTMLAnchorElement;
+                    el.style.background = '#C8A96E';
+                    el.style.color = '#080E18';
+                    el.style.borderColor = '#C8A96E';
+                  }}
+                  onMouseLeave={e => {
+                    const el = e.currentTarget as HTMLAnchorElement;
+                    el.style.background = 'rgba(200,169,110,0.05)';
+                    el.style.color = 'rgba(240,237,232,0.55)';
+                    el.style.borderColor = 'rgba(200,169,110,0.2)';
+                  }}
+                >
+                  <Icon size={17} />
                 </a>
               ))}
             </div>
           </div>
 
+          {/* Quick Links */}
           <div>
-            <h4 className="text-sm font-bold uppercase tracking-widest mb-8 text-accent">Quick Links</h4>
+            <h4
+              className="text-[10px] font-bold uppercase tracking-widest mb-8"
+              style={{ color: '#C8A96E' }}
+            >
+              Quick Links
+            </h4>
             <ul className="space-y-4">
               {[
                 { name: 'Destinations', href: '/#destinations' },
-                { name: 'Packages', href: '/#packages' },
-                { name: 'Services', href: '/#services' },
-                { name: 'About Us', href: '/#about' },
-                { name: 'Contact', href: '/#contact' }
+                { name: 'Packages',     href: '/#packages'     },
+                { name: 'Services',     href: '/#services'     },
+                { name: 'About Us',     href: '/#about'        },
+                { name: 'Contact',      href: '/#contact'      },
               ].map((item) => (
                 <li key={item.name}>
-                  <a href={item.href} className="text-text/60 hover:text-accent transition-colors uppercase text-xs tracking-widest font-medium">
+                  <a
+                    href={item.href}
+                    className="text-[11px] uppercase tracking-widest font-semibold transition-colors duration-200"
+                    style={{ color: 'rgba(240,237,232,0.45)' }}
+                    onMouseEnter={e => (e.currentTarget.style.color = '#C8A96E')}
+                    onMouseLeave={e => (e.currentTarget.style.color = 'rgba(240,237,232,0.45)')}
+                  >
                     {item.name}
                   </a>
                 </li>
@@ -54,29 +94,61 @@ export function Footer() {
             </ul>
           </div>
 
+          {/* Newsletter */}
           <div>
-            <h4 className="text-sm font-bold uppercase tracking-widest mb-8 text-accent">Newsletter</h4>
-            <p className="text-text/60 text-sm mb-6 font-light">Subscribe to get secret travel deals.</p>
+            <h4
+              className="text-[10px] font-bold uppercase tracking-widest mb-8"
+              style={{ color: '#C8A96E' }}
+            >
+              Newsletter
+            </h4>
+            <p className="text-sm mb-6 font-light" style={{ color: 'rgba(240,237,232,0.45)' }}>
+              Subscribe for secret travel deals.
+            </p>
             <div className="relative">
-              <input 
-                type="email" 
-                placeholder="Your email" 
-                className="w-full bg-text/5 border border-text/10 rounded-full py-4 px-6 text-sm focus:outline-none focus:border-accent transition-colors text-text placeholder:text-text/40"
+              <input
+                type="email"
+                placeholder="Your email"
+                className="w-full rounded-full py-3.5 pl-5 pr-14 text-sm focus:outline-none transition-colors"
+                style={{
+                  background: 'rgba(255,255,255,0.04)',
+                  border: '1px solid rgba(200,169,110,0.15)',
+                  color: '#F0EDE8',
+                }}
+                onFocus={e => (e.currentTarget.style.borderColor = 'rgba(200,169,110,0.45)')}
+                onBlur={e => (e.currentTarget.style.borderColor = 'rgba(200,169,110,0.15)')}
               />
-              <button className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-accent rounded-full flex items-center justify-center text-primary hover:scale-105 transition-transform">
-                <ArrowRight size={18} />
+              <button
+                className="absolute right-1.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-105"
+                style={{ background: '#C8A96E', color: '#080E18' }}
+              >
+                <ArrowRight size={16} />
               </button>
             </div>
           </div>
         </div>
 
-        <div className="pt-12 border-t border-text/10 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-text/40 text-xs tracking-widest uppercase">
+        {/* Bottom bar */}
+        <div
+          className="pt-10 flex flex-col md:flex-row justify-between items-center gap-5"
+          style={{ borderTop: '1px solid rgba(240,237,232,0.07)' }}
+        >
+          <p className="text-[11px] tracking-widest uppercase" style={{ color: 'rgba(240,237,232,0.3)' }}>
             © 2024 Dream Route Tourism LLC. All rights reserved.
           </p>
           <div className="flex gap-8">
-            <a href="#" className="text-text/40 hover:text-accent text-xs tracking-widest uppercase transition-colors">Privacy Policy</a>
-            <a href="#" className="text-text/40 hover:text-accent text-xs tracking-widest uppercase transition-colors">Terms of Service</a>
+            {['Privacy Policy', 'Terms of Service'].map(t => (
+              <a
+                key={t}
+                href="#"
+                className="text-[11px] tracking-widest uppercase transition-colors duration-200"
+                style={{ color: 'rgba(240,237,232,0.3)' }}
+                onMouseEnter={e => (e.currentTarget.style.color = '#C8A96E')}
+                onMouseLeave={e => (e.currentTarget.style.color = 'rgba(240,237,232,0.3)')}
+              >
+                {t}
+              </a>
+            ))}
           </div>
         </div>
       </div>

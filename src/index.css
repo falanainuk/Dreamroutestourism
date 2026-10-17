@@ -1,46 +1,365 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
+/* ─── Design Tokens ─────────────────────────────────── */
 @theme {
-  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Cormorant Garamond", serif;
-  
-  --color-primary: var(--bg);
-  --color-surface: var(--surface);
-  --color-text: var(--text);
-  --color-accent: #C5A059;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "DM Serif Display", Georgia, serif;
+
+  --color-accent: #C8A96E;       /* warm gold */
+  --color-accent-light: #E8D5A8;
 }
 
+/* ─── Base ──────────────────────────────────────────── */
 @layer base {
   :root {
-    --bg: #0A1A2F;
-    --text: #ffffff;
-    --surface: #112240;
+    --bg:      #080E18;   /* deep midnight navy */
+    --surface: #0E1724;   /* slightly lifted panel */
+    --border:  rgba(255,255,255,0.07);
+    --text:    #F0EDE8;   /* warm off-white */
+    --muted:   rgba(240,237,232,0.45);
   }
 
   :root.light {
-    --bg: #f8fafc;
-    --text: #0A1A2F;
-    --surface: #ffffff;
+    --bg:      #F6F3EE;
+    --surface: #FFFFFF;
+    --border:  rgba(0,0,0,0.08);
+    --text:    #0E1724;
+    --muted:   rgba(14,23,36,0.5);
   }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
 
   body {
-    background-color: var(--bg);
+    background-color: transparent;
     color: var(--text);
-    @apply font-sans antialiased transition-colors duration-500;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.4s ease, color 0.4s ease;
+    overflow-x: hidden;
   }
-  
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--bg);
+  }
+
   h1, h2, h3, h4, h5, h6 {
-    @apply font-sans tracking-tight;
+    font-family: var(--font-sans);
+    letter-spacing: -0.03em;
+    line-height: 1.05;
   }
+
+  img { display: block; max-width: 100%; }
 }
 
+/* ─── Tailwind helpers ──────────────────────────────── */
+.bg-primary   { background-color: var(--bg); }
+.bg-surface   { background-color: var(--surface); }
+.text-text     { color: var(--text); }
+.text-muted    { color: var(--muted); }
+.border-border { border-color: var(--border); }
+.text-accent   { color: var(--color-accent); }
+.bg-accent     { background-color: var(--color-accent); }
+.text-primary  { color: var(--bg); }
+
+/* ─── Section overlay helpers ───────────────────────── */
+/* Use on sections that should float over the animated bg */
+.section-overlay {
+  background: rgba(8, 14, 24, 0.82);
+  backdrop-filter: blur(2px);
+}
+.section-overlay-light {
+  background: rgba(14, 23, 36, 0.88);
+  backdrop-filter: blur(2px);
+}
+
+/* ─── Glass utility ─────────────────────────────────── */
 .glass {
-  @apply backdrop-blur-md border border-white/10;
-  background-color: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  background-color: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+}
+.light .glass {
+  background-color: rgba(255,255,255,0.75);
+  border: 1px solid rgba(0,0,0,0.06);
 }
 
-.light .glass {
-  background-color: rgba(15, 23, 42, 0.03);
-  @apply border-black/5;
+/* ─── Scrollbar ─────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-accent); border-radius: 4px; }
+
+/* ════════════════════════════════════════════════════════
+   V C A R D   P A G E
+   ════════════════════════════════════════════════════════ */
+
+.vcard-root {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  font-family: var(--font-sans);
+  /* background handled by canvas */
 }
+
+
+.vcard-card {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 2rem;
+  padding: 2.5rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.03),
+    0 32px 80px rgba(0,0,0,0.55),
+    0 8px 24px rgba(200,169,110,0.06);
+  overflow: hidden;
+}
+
+/* Decorative rule at top */
+.vcard-rule {
+  width: 48px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+  border-radius: 1px;
+  margin-bottom: 2rem;
+}
+.vcard-rule-bottom {
+  margin-top: 1.75rem;
+  margin-bottom: 0;
+}
+
+/* Logo */
+.vcard-logo-wrap {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #ffffff;
+  padding: 6px;
+  box-shadow:
+    0 0 0 1px rgba(200,169,110,0.25),
+    0 8px 32px rgba(200,169,110,0.15);
+  margin-bottom: 1.25rem;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.vcard-logo-img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+}
+
+/* Brand */
+.vcard-brand {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.vcard-brand-name {
+  font-family: var(--font-sans);
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin-bottom: 0.35rem;
+}
+.vcard-brand-tagline {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  opacity: 0.85;
+}
+
+/* Divider */
+.vcard-divider {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+  margin-bottom: 1.5rem;
+  transform-origin: left;
+}
+
+/* Primary action buttons */
+.vcard-actions {
+  display: flex;
+  gap: 0.75rem;
+  width: 100%;
+  margin-bottom: 1.25rem;
+}
+.vcard-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1rem;
+  border-radius: 0.875rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, filter 0.22s ease;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+.vcard-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+}
+.vcard-btn-wa {
+  background: linear-gradient(135deg, #1DA855 0%, #128C3E 100%);
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(29,168,85,0.25);
+}
+.vcard-btn-nav {
+  background: linear-gradient(135deg, #2E63E8 0%, #1A40B0 100%);
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(46,99,232,0.2);
+}
+
+/* Contact rows */
+.vcard-contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+.vcard-contact-row {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  padding: 0.85rem 1rem;
+  border-radius: 0.875rem;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  text-decoration: none;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  cursor: pointer;
+  position: relative;
+}
+.vcard-contact-row:hover {
+  background: rgba(200,169,110,0.06);
+  border-color: rgba(200,169,110,0.22);
+  transform: translateX(3px);
+}
+.vcard-contact-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 0.6rem;
+  background: rgba(200,169,110,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-accent);
+  flex-shrink: 0;
+  transition: background 0.2s ease;
+}
+.vcard-contact-row:hover .vcard-contact-icon {
+  background: rgba(200,169,110,0.18);
+}
+.vcard-contact-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  flex: 1;
+  min-width: 0;
+}
+.vcard-contact-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  opacity: 0.8;
+}
+.vcard-contact-value {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.vcard-contact-arrow {
+  color: var(--muted);
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.vcard-contact-row:hover .vcard-contact-arrow {
+  opacity: 1;
+  transform: translate(2px, -2px);
+}
+
+/* Social section */
+.vcard-social-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.875rem;
+  margin-bottom: 1.25rem;
+}
+.vcard-social-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.vcard-socials {
+  display: flex;
+  gap: 0.75rem;
+}
+.vcard-social-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  color: var(--text);
+  text-decoration: none;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+.vcard-social-btn:hover {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--bg);
+  transform: translateY(-3px);
+}
+
+/* Return link */
+.vcard-return { margin-top: 0.25rem; }
+.vcard-return-link {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.vcard-return-link:hover { color: var(--color-accent); }

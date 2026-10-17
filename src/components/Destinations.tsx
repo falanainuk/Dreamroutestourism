@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { ArrowUpRight, MapPin, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useData } from '../contexts/DataContext';
 import { Link } from 'react-router-dom';
+import { TiltCard } from './TiltCard';
 
 export function Destinations({ onItemClick, onBookClick }: { onItemClick?: (item: any) => void, onBookClick?: () => void }) {
   const { data } = useData();
@@ -21,7 +22,7 @@ export function Destinations({ onItemClick, onBookClick }: { onItemClick?: (item
   const visible = destinations.slice(currentIndex, currentIndex + visibleCount);
 
   return (
-    <section id="destinations" className="py-24 md:py-32 bg-primary overflow-hidden">
+    <section id="destinations" className="py-24 md:py-32 section-overlay overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
           <div className="max-w-2xl">
@@ -98,46 +99,48 @@ export function Destinations({ onItemClick, onBookClick }: { onItemClick?: (item
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.08 }}
-                    className="group relative h-[550px] overflow-hidden rounded-3xl"
+                    className="h-[550px]"
                   >
-                    <img
-                      src={dest.image}
-                      alt={dest.name}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-primary via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+                    <TiltCard className="group relative h-full w-full overflow-hidden rounded-3xl" intensity={8} glare={true}>
+                      <img
+                        src={dest.image}
+                        alt={dest.name}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-primary via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
 
-                    <div className="absolute top-6 left-6">
-                      <div className="px-3 py-1 rounded-full bg-accent/20 backdrop-blur-md border border-accent/30 text-accent text-[8px] font-bold uppercase tracking-widest">
-                        {dest.departureType}
-                      </div>
-                    </div>
-
-                    <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                      <div className="flex items-center gap-2 mb-2">
-                        <MapPin size={14} className="text-accent" />
-                        <span className="text-[10px] uppercase tracking-widest font-bold text-gray-300">{dest.country}</span>
-                      </div>
-                      <h3 className="text-3xl font-bold mb-4">{dest.name}</h3>
-
-                      <div className="flex items-center justify-between overflow-hidden">
-                        <div className="space-y-1">
-                          <p className="text-accent font-bold text-sm tracking-widest">AED {dest.price}</p>
-                          <button
-                            onClick={() => onItemClick?.(dest)}
-                            className="text-[10px] font-bold uppercase tracking-widest text-white/50 hover:text-accent transition-colors"
-                          >
-                            More Information
-                          </button>
+                      <div className="absolute top-6 left-6">
+                        <div className="px-3 py-1 rounded-full bg-accent/20 backdrop-blur-md border border-accent/30 text-accent text-[8px] font-bold uppercase tracking-widest">
+                          {dest.departureType}
                         </div>
-                        <motion.div
-                          onClick={onBookClick}
-                          className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-primary cursor-pointer hover:bg-accent transition-colors"
-                        >
-                          <ArrowUpRight size={24} />
-                        </motion.div>
                       </div>
-                    </div>
+
+                      <div className="absolute inset-0 p-8 flex flex-col justify-end">
+                        <div className="flex items-center gap-2 mb-2">
+                          <MapPin size={14} className="text-accent" />
+                          <span className="text-[10px] uppercase tracking-widest font-bold text-gray-300">{dest.country}</span>
+                        </div>
+                        <h3 className="text-3xl font-bold mb-4">{dest.name}</h3>
+
+                        <div className="flex items-center justify-between overflow-hidden">
+                          <div className="space-y-1">
+                            <p className="text-accent font-bold text-sm tracking-widest">AED {dest.price}</p>
+                            <button
+                              onClick={() => onItemClick?.(dest)}
+                              className="text-[10px] font-bold uppercase tracking-widest text-white/50 hover:text-accent transition-colors"
+                            >
+                              More Information
+                            </button>
+                          </div>
+                          <motion.div
+                            onClick={onBookClick}
+                            className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-primary cursor-pointer hover:bg-accent transition-colors"
+                          >
+                            <ArrowUpRight size={24} />
+                          </motion.div>
+                        </div>
+                      </div>
+                    </TiltCard>
                   </motion.div>
                 ))}
               </motion.div>

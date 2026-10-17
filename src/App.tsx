@@ -15,6 +15,8 @@ import { Admin } from './components/Admin';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { DataProvider, useData } from './contexts/DataContext';
 import { FloatingActions } from './components/FloatingActions';
+import { AnimatedBackground } from './components/AnimatedBackground';
+import { ScrollProgress } from './components/ScrollProgress';
 import { BookingModal } from './components/BookingModal';
 import { Contact } from './components/Contact';
 import { Packages } from './components/Packages';
@@ -42,15 +44,18 @@ function MainLayout() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
-      className="min-h-screen bg-primary selection:bg-accent selection:text-primary"
+      className="min-h-screen selection:bg-accent selection:text-primary"
+      style={{ position: 'relative', zIndex: 1 }}
     >
+      <ScrollProgress />
+      <AnimatedBackground />
       <Navbar onBookClick={() => setIsBookingOpen(true)} />
       
       <main>
         <Hero onBookClick={() => setIsBookingOpen(true)} />
         
         {/* About Section / Sub-Hero */}
-        <section id="about" className="py-24 md:py-40 bg-surface text-center overflow-hidden">
+        <section id="about" className="py-24 md:py-40 text-center overflow-hidden section-overlay">
           <div className="max-w-4xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}

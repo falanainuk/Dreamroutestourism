@@ -32,7 +32,7 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 md:py-32 bg-primary relative overflow-hidden">
+    <section id="contact" className="py-24 md:py-32 section-overlay relative overflow-hidden">
       {/* Background ambient glow */}
       <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-accent/10 rounded-full blur-[120px] -translate-y-1/2" />
       
